@@ -768,7 +768,7 @@ export const WEDDING_TEMPLATES: Record<number, WeddingTheme> = {
       surface: "#dcfce7",
       border: "#86efac",
     },
-    fonts: { headingVar: "--font-lora", bodyVar: "--font-parisienne" },
+    fonts: { headingVar: "--font-parisienne", bodyVar: "--font-lora" },
   },
   11: {
     templateId: 11,
