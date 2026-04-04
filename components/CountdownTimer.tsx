@@ -110,7 +110,7 @@ function CountBlock({
 
 export function CountdownTimer({ theme, templateId, couple }: CountdownTimerProps) {
   const reducedMotion = !!useReducedMotion();
-  const isDark = templateId === 4 || templateId === 8;
+  const isDark = [4, 8, 12, 14].includes(templateId);
   const accent = theme.colors.accent;
 
   const target = parseWeddingDate(couple.date);

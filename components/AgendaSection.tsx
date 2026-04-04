@@ -41,7 +41,7 @@ export function AgendaSection({ theme, templateId, couple }: AgendaSectionProps)
   const { agenda } = couple;
   if (!agenda.length) return null;
 
-  const isDark = templateId === 4 || templateId === 8;
+  const isDark = [4, 8, 12, 14].includes(templateId);
   const reducedMotion = useReducedMotion();
   const accent = theme.colors.accent;
   const surface = theme.colors.surface ?? theme.colors.background;

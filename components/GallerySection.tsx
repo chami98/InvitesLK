@@ -34,7 +34,7 @@ export function GallerySection({ theme, templateId, couple }: GallerySectionProp
   if (!gallery.length) return null;
 
   const variant = variantByTemplate[templateId] ?? "modern";
-  const isDark = templateId === 4 || templateId === 8;
+  const isDark = [4, 8, 12, 14].includes(templateId);
 
   return (
     <section
