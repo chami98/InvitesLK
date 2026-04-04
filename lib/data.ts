@@ -66,7 +66,7 @@ const WEDDING_PHOTOS: GalleryImage[] = [
     caption: "Golden hour, golden hearts",
   },
   {
-    src: "https://images.unsplash.com/photo-1606800052052-a08cfe714f87?w=1600&q=80",
+    src: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1600&q=80",
     alt: "Wedding reception tables",
     caption: "Where we'll celebrate with you",
   },
@@ -76,7 +76,7 @@ const WEDDING_PHOTOS: GalleryImage[] = [
     caption: "Blooms for the big day",
   },
   {
-    src: "https://images.unsplash.com/photo-1529636799528-921f0e0e1a0d?w=1600&q=80",
+    src: "https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=1600&q=80",
     alt: "First dance",
     caption: "Our first dance",
   },
@@ -86,7 +86,7 @@ const WEDDING_PHOTOS: GalleryImage[] = [
     caption: "Cheers to love",
   },
   {
-    src: "https://images.unsplash.com/photo-1609561216330-c4b0b6f3e0c0?w=1600&q=80",
+    src: "https://images.unsplash.com/photo-1531058020387-3be344556be6?w=1600&q=80",
     alt: "Outdoor ceremony arch",
     caption: "Under open skies",
   },
@@ -96,7 +96,7 @@ const WEDDING_PHOTOS: GalleryImage[] = [
     caption: "Surrounded by our people",
   },
   {
-    src: "https://images.unsplash.com/photo-1520854221050-0f4caff4492f?w=1600&q=80",
+    src: "https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=1600&q=80",
     alt: "Couple holding hands",
     caption: "Hand in hand",
   },
@@ -111,17 +111,17 @@ const WEDDING_PHOTOS: GalleryImage[] = [
     caption: "Lights, love, laughter",
   },
   {
-    src: "https://images.unsplash.com/photo-1515934751635-c81c6bc18438?w=1600&q=80",
+    src: "https://images.unsplash.com/photo-1486746290722-483e8f1e44d2?w=1600&q=80",
     alt: "Wedding aisle view",
     caption: "Down the aisle",
   },
   {
-    src: "https://images.unsplash.com/photo-1524778059297-7b931381c08f?w=1600&q=80",
+    src: "https://images.unsplash.com/photo-1445019980597-93fa8acb246c?w=1600&q=80",
     alt: "Bridal bouquet detail",
     caption: "Soft petals & promises",
   },
   {
-    src: "https://images.unsplash.com/photo-1530023367847-a683933f4177?w=1600&q=80",
+    src: "https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=1600&q=80",
     alt: "Couple sunset silhouette",
     caption: "Sunset with you",
   },
@@ -131,7 +131,7 @@ const WEDDING_PHOTOS: GalleryImage[] = [
     caption: "This way to forever",
   },
   {
-    src: "https://images.unsplash.com/photo-1594443143921-c7d8e26d867c?w=1600&q=80",
+    src: "https://images.unsplash.com/photo-1533488765986-dfa2a9939acd?w=1600&q=80",
     alt: "Table setting candles",
     caption: "Candlelit dinner",
   },
@@ -141,12 +141,12 @@ const WEDDING_PHOTOS: GalleryImage[] = [
     caption: "Classic & sharp",
   },
   {
-    src: "https://images.unsplash.com/photo-1523438885200-e635ba2c175e?w=1600&q=80",
+    src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80",
     alt: "Confetti celebration",
     caption: "And they cheered",
   },
   {
-    src: "https://images.unsplash.com/photo-1583938909119-ff732a8e9672?w=1600&q=80",
+    src: "https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1600&q=80",
     alt: "Outdoor garden vows",
     caption: "Among the greenery",
   },
