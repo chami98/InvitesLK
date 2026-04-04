@@ -84,11 +84,6 @@ export function GallerySection({ theme, templateId, couple }: GallerySectionProp
         <div className="mt-10">
           <GalleryMosaic images={gallery} accentColor={theme.colors.accent} />
         </div>
-        <ScrollReveal y={16} delay={0.04} className="mt-8">
-          <p className="text-center text-xs text-[color:var(--theme-muted)]">
-            Placeholder photography via Unsplash — replace with your own images anytime.
-          </p>
-        </ScrollReveal>
       </div>
     </section>
   );
