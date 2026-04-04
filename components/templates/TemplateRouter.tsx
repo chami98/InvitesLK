@@ -6,6 +6,9 @@ import { Template12 } from "./Template12";
 import { Template13 } from "./Template13";
 import { Template14 } from "./Template14";
 import { Template15 } from "./Template15";
+import { Template16 } from "./Template16";
+import { Template17 } from "./Template17";
+import { Template18 } from "./Template18";
 import { Template2 } from "./Template2";
 import { Template3 } from "./Template3";
 import { Template4 } from "./Template4";
@@ -50,6 +53,12 @@ export function TemplateRouter({ templateId, ...props }: RouterProps) {
       return <Template14 {...props} />;
     case 15:
       return <Template15 {...props} />;
+    case 16:
+      return <Template16 {...props} />;
+    case 17:
+      return <Template17 {...props} />;
+    case 18:
+      return <Template18 {...props} />;
     default:
       return <Template1 {...props} />;
   }

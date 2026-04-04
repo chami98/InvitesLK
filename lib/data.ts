@@ -835,6 +835,45 @@ export const WEDDING_TEMPLATES: Record<number, WeddingTheme> = {
     },
     fonts: { headingVar: "--font-great-vibes", bodyVar: "--font-nunito" },
   },
+  16: {
+    templateId: 16,
+    name: "Poruwa Gold",
+    colors: {
+      background: "#fdf5dc",
+      foreground: "#4a1728",
+      accent: "#c8860a",
+      muted: "#7a5038",
+      surface: "#fff9ea",
+      border: "#d4af37",
+    },
+    fonts: { headingVar: "--font-playfair", bodyVar: "--font-lora" },
+  },
+  17: {
+    templateId: 17,
+    name: "Kandyan Heritage",
+    colors: {
+      background: "#180800",
+      foreground: "#fde68a",
+      accent: "#f59e0b",
+      muted: "#c8a030",
+      surface: "#2d1200",
+      border: "#b45309",
+    },
+    fonts: { headingVar: "--font-cormorant", bodyVar: "--font-italiana" },
+  },
+  18: {
+    templateId: 18,
+    name: "Jasmine & Saffron",
+    colors: {
+      background: "#fdf4e3",
+      foreground: "#7c0000",
+      accent: "#d97706",
+      muted: "#9a5a00",
+      surface: "#fff8e1",
+      border: "#f59e0b",
+    },
+    fonts: { headingVar: "--font-great-vibes", bodyVar: "--font-lora" },
+  },
 };
 
 // ─── Couples ─────────────────────────────────────────────────────────────────
@@ -989,6 +1028,36 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 15,
     gallery: pickGallery(14),
     agenda: buildGardenAgenda("Cinnamon Lodge, Habarana"),
+  },
+  {
+    slug: "lakshan-nethmi",
+    partnerA: "Lakshan",
+    partnerB: "Nethmi",
+    date: "Saturday, March 28, 2026",
+    venue: "Galadari Hotel, Colombo",
+    templateId: 16,
+    gallery: pickGallery(15),
+    agenda: buildPoruwaAgenda("Galadari Hotel, Colombo"),
+  },
+  {
+    slug: "prasad-hashini",
+    partnerA: "Prasad",
+    partnerB: "Hashini",
+    date: "Sunday, August 23, 2026",
+    venue: "Queen's Hotel, Kandy",
+    templateId: 17,
+    gallery: pickGallery(16),
+    agenda: buildKandyanAgenda("Queen's Hotel, Kandy"),
+  },
+  {
+    slug: "arjun-kavitha",
+    partnerA: "Arjun",
+    partnerB: "Kavitha",
+    date: "Saturday, November 14, 2026",
+    venue: "Jaffna Heritage Hotel",
+    templateId: 18,
+    gallery: pickGallery(17),
+    agenda: buildHinduAgenda("Jaffna Heritage Hotel"),
   },
 ];
 

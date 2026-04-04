@@ -21,6 +21,9 @@ const TEMPLATE_PALETTES: Record<number, keyof typeof PALETTES> = {
   13: "blushPink",
   14: "burgundy",
   15: "creamGold",
+  16: "creamGold",
+  17: "burgundy",
+  18: "terracotta",
 };
 
 // One sample invitee per template
@@ -40,6 +43,9 @@ const SAMPLE_NAMES: Record<string, string> = {
   "kavindi-shehan": "Dr.+Priyantha+%26+Family",
   "malinda-sithara": "Mr.+%26+Mrs.+Wijeratne",
   "thilina-devindi": "Kavinga+Senanayake",
+  "lakshan-nethmi": "Mr.+%26+Mrs.+Gunawardena",
+  "prasad-hashini": "Kanishka+Bandara",
+  "arjun-kavitha": "Mr.+%26+Mrs.+Krishnamurthy",
 };
 
 export default function Home() {
@@ -62,7 +68,7 @@ export default function Home() {
           <span className="h-px w-12 bg-stone-300" />
         </div>
         <p className="mt-4 text-sm leading-relaxed text-stone-500">
-          15 beautiful designs — each a personalised digital invitation
+          18 beautiful designs — each a personalised digital invitation
           <br className="hidden sm:block" /> your guests open on any device.
         </p>
       </header>
