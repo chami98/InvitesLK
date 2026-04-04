@@ -15,10 +15,10 @@ type PageProps = {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { coupleSlug } = await params;
   const couple = getCoupleBySlug(coupleSlug);
-  if (!couple) return { title: "Invitation" };
+  if (!couple) return { title: "Invitation — InvitesLK" };
   return {
-    title: `${couple.partnerA} & ${couple.partnerB} — Wedding`,
-    description: `Wedding invitation for ${couple.partnerA} and ${couple.partnerB}.`,
+    title: `${couple.partnerA} & ${couple.partnerB} — Wedding | InvitesLK`,
+    description: `You're invited! Wedding invitation for ${couple.partnerA} and ${couple.partnerB}, crafted by InvitesLK.`,
   };
 }
 

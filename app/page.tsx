@@ -21,9 +21,6 @@ const TEMPLATE_PALETTES: Record<number, keyof typeof PALETTES> = {
   13: "blushPink",
   14: "burgundy",
   15: "creamGold",
-  16: "creamGold",
-  17: "burgundy",
-  18: "terracotta",
 };
 
 // One sample invitee per template
@@ -43,9 +40,6 @@ const SAMPLE_NAMES: Record<string, string> = {
   "kavindi-shehan": "Dr.+Priyantha+%26+Family",
   "malinda-sithara": "Mr.+%26+Mrs.+Wijeratne",
   "thilina-devindi": "Kavinga+Senanayake",
-  "lakshan-nethmi": "Mr.+%26+Mrs.+Gunawardena",
-  "prasad-hashini": "Kanishka+Bandara",
-  "arjun-kavitha": "Mr.+%26+Mrs.+Krishnamurthy",
 };
 
 export default function Home() {
@@ -57,18 +51,21 @@ export default function Home() {
           Digital Wedding Invitations
         </p>
         <h1
-          className="mt-4 text-4xl font-normal leading-tight text-stone-900 sm:text-5xl"
+          className="mt-3 text-5xl font-normal leading-none tracking-wide text-stone-900 sm:text-6xl"
           style={{ fontFamily: "var(--font-playfair), serif" }}
         >
-          Choose Your Template
+          InvitesLK
         </h1>
         <div className="mt-4 flex items-center justify-center gap-3">
           <span className="h-px w-12 bg-stone-300" />
           <span className="text-stone-400">✦</span>
           <span className="h-px w-12 bg-stone-300" />
         </div>
-        <p className="mt-4 text-sm leading-relaxed text-stone-500">
-          18 beautiful designs — each a personalised digital invitation
+        <p className="mt-4 text-sm font-medium uppercase tracking-[0.2em] text-stone-500">
+          Choose Your Template
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-stone-400">
+          15 beautiful designs — each a personalised digital invitation
           <br className="hidden sm:block" /> your guests open on any device.
         </p>
       </header>
@@ -233,6 +230,16 @@ export default function Home() {
             ?invite=Guest+Name
           </code>{" "}
           to any URL to personalise the greeting.
+        </p>
+        <p className="mt-6 text-center text-xs text-stone-300">
+          &copy; {new Date().getFullYear()}{" "}
+          <span
+            className="font-semibold text-stone-400"
+            style={{ fontFamily: "var(--font-playfair), serif" }}
+          >
+            InvitesLK
+          </span>{" "}
+          — Crafted with care for your special day.
         </p>
       </main>
     </div>
