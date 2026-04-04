@@ -865,7 +865,7 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     partnerA: "Damsarani",
     partnerB: "Supun",
     date: "Sunday, September 20, 2026",
-    venue: "Hotel Janro, Dompe",
+    venue: "Galadari Hotel, Colombo",
     templateId: 3,
     gallery: pickGallery(4),
     agenda: buildPoruwaAgenda("Hotel Janro, Dompe"),
