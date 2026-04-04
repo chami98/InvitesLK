@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <!-- Clip left half of viewport — for right ring's "behind" arc -->
+    <clipPath id="rightHalf">
+      <rect x="15" y="0" width="17" height="32"/>
+    </clipPath>
+    <!-- Clip right half of viewport — for left ring's "behind" arc -->
+    <clipPath id="leftHalf">
+      <rect x="0" y="0" width="17" height="32"/>
+    </clipPath>
+  </defs>
+
+  <!-- Warm ivory background -->
+  <rect width="32" height="32" rx="7" fill="#fdf4ee"/>
+
+  <!-- Right ring back half (behind left ring) -->
+  <circle cx="19.5" cy="16" r="6.5" fill="none" stroke="#b87333" stroke-width="2.6" clip-path="url(#rightHalf)"/>
+
+  <!-- Left ring (fully on top of right ring's back half) -->
+  <circle cx="12.5" cy="16" r="6.5" fill="none" stroke="#7c1c2e" stroke-width="2.6"/>
+
+  <!-- Right ring front half (on top of left ring) -->
+  <circle cx="19.5" cy="16" r="6.5" fill="none" stroke="#b87333" stroke-width="2.6" clip-path="url(#leftHalf)"/>
+</svg>
