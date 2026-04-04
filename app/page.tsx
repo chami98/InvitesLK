@@ -22,7 +22,7 @@ const TEMPLATE_PALETTES: Record<number, keyof typeof PALETTES> = {
 const SAMPLE_NAMES: Record<string, string> = {
   "supun-thilini": "Mr.+%26+Mrs.+Perera",
   "kasun-dilrukshi": "Nuwan+Silva",
-  "nayomi-shevan": "Mr.+%26+Mrs.+Rodrigo",
+  "damsarani-supun": "Mr.+%26+Mrs.+Rodrigo",
   "nuwan-sachini": "Chaminda+Jayawardena",
   "ishara-chamara": "The+Wickramasinghe+Family",
   "dinesh-priyanka": "Dr.+Rajan+%26+Family",

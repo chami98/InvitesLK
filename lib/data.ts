@@ -658,9 +658,9 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     agenda: buildModernAgenda("Cinnamon Grand, Colombo"),
   },
   {
-    slug: "nayomi-shevan",
-    partnerA: "Nayomi",
-    partnerB: "Shevan",
+    slug: "damsarani-supun",
+    partnerA: "Damsarani",
+    partnerB: "Supun",
     date: "Sunday, September 20, 2026",
     venue: "Hotel Janro, Dompe",
     templateId: 3,
