@@ -458,6 +458,144 @@ function buildCoastalAgenda(venue: string): AgendaItem[] {
   ];
 }
 
+/** Open-air garden morning wedding */
+function buildGardenAgenda(venue: string): AgendaItem[] {
+  return [
+    {
+      time: "8:30 AM",
+      title: "Morning arrival",
+      description:
+        "Arrive as the garden awakens — fresh blooms, birdsong, and a warm herbal welcome tea.",
+      location: venue,
+    },
+    {
+      time: "9:30 AM",
+      title: "Garden ceremony",
+      description:
+        "An intimate outdoor ceremony beneath a floral arch, surrounded by the beauty of nature.",
+    },
+    {
+      time: "10:30 AM",
+      title: "Kiribath & blessings",
+      description:
+        "A heartfelt milk rice ritual and family blessings in the garden shade.",
+    },
+    {
+      time: "12:00 PM",
+      title: "Garden luncheon",
+      description:
+        "Alfresco dining — a rustic spread of Sri Lankan flavours on beautifully set garden tables.",
+      location: "Garden terrace",
+    },
+    {
+      time: "5:30 PM",
+      title: "Golden hour cocktails",
+      description:
+        "Light refreshments as the garden glows in the late afternoon sun.",
+      location: "Lawn terrace",
+    },
+    {
+      time: "7:00 PM",
+      title: "Evening reception & dinner",
+      description:
+        "Candlelit tables under the stars, live acoustic guitar, and a night to treasure.",
+    },
+    {
+      time: "9:30 PM",
+      title: "Dancing & farewell",
+      description: "Celebrate under fairy lights until the stars say goodnight.",
+    },
+  ];
+}
+
+/** Rooftop / sky-view evening wedding */
+function buildRooftopAgenda(venue: string): AgendaItem[] {
+  return [
+    {
+      time: "4:30 PM",
+      title: "Guest arrival",
+      description:
+        "Arrive as the city lights begin to glow — welcome cocktails on the rooftop terrace.",
+      location: venue,
+    },
+    {
+      time: "5:00 PM",
+      title: "Sunset ceremony",
+      description:
+        "Vows exchanged as the sun melts into the horizon — an unforgettable backdrop.",
+    },
+    {
+      time: "5:45 PM",
+      title: "Cocktail hour & photographs",
+      description:
+        "Mingle with loved ones under the open sky while we capture every golden moment.",
+      location: "Sky lounge",
+    },
+    {
+      time: "7:30 PM",
+      title: "Reception dinner",
+      description:
+        "Dinner under the stars with a panoramic city skyline as your backdrop.",
+      location: "Rooftop terrace",
+    },
+    {
+      time: "9:00 PM",
+      title: "Speeches & cake cutting",
+      description:
+        "Heartfelt toasts from those who love you most, followed by the ceremonial cake.",
+    },
+    {
+      time: "10:00 PM",
+      title: "Dancing & celebration",
+      description: "Dance the night away with the city sparkling all around you.",
+    },
+  ];
+}
+
+/** Intimate villa / boutique resort wedding */
+function buildVillaAgenda(venue: string): AgendaItem[] {
+  return [
+    {
+      time: "10:00 AM",
+      title: "Guest arrival & welcome",
+      description:
+        "Arrive at the villa — cool drinks, soft music, and warmth from both families.",
+      location: venue,
+    },
+    {
+      time: "11:00 AM",
+      title: "Intimate ceremony",
+      description:
+        "A private, heartfelt ceremony with only those closest to the couple.",
+    },
+    {
+      time: "12:00 PM",
+      title: "Champagne brunch",
+      description:
+        "Celebrate with a leisurely poolside brunch — Sri Lankan and continental favourites.",
+      location: "Pool terrace",
+    },
+    {
+      time: "4:00 PM",
+      title: "Afternoon tea & relaxation",
+      description:
+        "Unwind with high tea and laughter in the gardens.",
+    },
+    {
+      time: "7:00 PM",
+      title: "Dinner & dancing",
+      description:
+        "An elegant sit-down dinner followed by dancing well into the night.",
+      location: "Grand villa hall",
+    },
+    {
+      time: "10:00 PM",
+      title: "Bonfire & farewell",
+      description: "Gather around the bonfire for stories, toasts, and warm goodbyes.",
+    },
+  ];
+}
+
 /** Minimal modern Sri Lankan wedding */
 function buildModernAgenda(venue: string): AgendaItem[] {
   return [
@@ -632,6 +770,71 @@ export const WEDDING_TEMPLATES: Record<number, WeddingTheme> = {
     },
     fonts: { headingVar: "--font-lora", bodyVar: "--font-parisienne" },
   },
+  11: {
+    templateId: 11,
+    name: "Sage & Blush",
+    colors: {
+      background: "#f4f5f0",
+      foreground: "#2a3428",
+      accent: "#c07888",
+      muted: "#6b7c6a",
+      surface: "#eef1e9",
+      border: "#adc4a0",
+    },
+    fonts: { headingVar: "--font-parisienne", bodyVar: "--font-cormorant" },
+  },
+  12: {
+    templateId: 12,
+    name: "Celestial",
+    colors: {
+      background: "#060b18",
+      foreground: "#dde4f5",
+      accent: "#c8b86a",
+      muted: "#8898c0",
+      surface: "#0d1428",
+      border: "#3a5090",
+    },
+    fonts: { headingVar: "--font-cinzel", bodyVar: "--font-cormorant" },
+  },
+  13: {
+    templateId: 13,
+    name: "Ivory & Petal",
+    colors: {
+      background: "#fffaf8",
+      foreground: "#281820",
+      accent: "#d05870",
+      muted: "#9a7080",
+      surface: "#fff5f4",
+      border: "#f0c0c8",
+    },
+    fonts: { headingVar: "--font-cormorant", bodyVar: "--font-outfit" },
+  },
+  14: {
+    templateId: 14,
+    name: "Velvet Noir",
+    colors: {
+      background: "#180810",
+      foreground: "#f5eae0",
+      accent: "#d4af37",
+      muted: "#c09888",
+      surface: "#24101a",
+      border: "#7a3858",
+    },
+    fonts: { headingVar: "--font-fraunces", bodyVar: "--font-lora" },
+  },
+  15: {
+    templateId: 15,
+    name: "Boho Gold",
+    colors: {
+      background: "#fdf5e2",
+      foreground: "#3b2808",
+      accent: "#c47c20",
+      muted: "#8a6030",
+      surface: "#fef8eb",
+      border: "#dfa040",
+    },
+    fonts: { headingVar: "--font-great-vibes", bodyVar: "--font-nunito" },
+  },
 };
 
 // ─── Couples ─────────────────────────────────────────────────────────────────
@@ -736,6 +939,56 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 10,
     gallery: pickGallery(9),
     agenda: buildKandyanAgenda("Amaya Hills, Kandy"),
+  },
+  {
+    slug: "chamari-dilantha",
+    partnerA: "Chamari",
+    partnerB: "Dilantha",
+    date: "Sunday, March 22, 2026",
+    venue: "Brief Garden, Beruwala",
+    templateId: 11,
+    gallery: pickGallery(10),
+    agenda: buildGardenAgenda("Brief Garden, Beruwala"),
+  },
+  {
+    slug: "ravindu-amaya",
+    partnerA: "Ravindu",
+    partnerB: "Amaya",
+    date: "Friday, January 16, 2026",
+    venue: "Hilton Colombo Residencies",
+    templateId: 12,
+    gallery: pickGallery(11),
+    agenda: buildRooftopAgenda("Hilton Colombo Residencies"),
+  },
+  {
+    slug: "kavindi-shehan",
+    partnerA: "Kavindi",
+    partnerB: "Shehan",
+    date: "Saturday, April 25, 2026",
+    venue: "Anantara Peace Haven, Tangalle",
+    templateId: 13,
+    gallery: pickGallery(12),
+    agenda: buildVillaAgenda("Anantara Peace Haven, Tangalle"),
+  },
+  {
+    slug: "malinda-sithara",
+    partnerA: "Malinda",
+    partnerB: "Sithara",
+    date: "Saturday, November 28, 2026",
+    venue: "Galle Face Hotel, Colombo",
+    templateId: 14,
+    gallery: pickGallery(13),
+    agenda: buildGrandPoruwaAgenda("Galle Face Hotel, Colombo"),
+  },
+  {
+    slug: "thilina-devindi",
+    partnerA: "Thilina",
+    partnerB: "Devindi",
+    date: "Sunday, October 18, 2026",
+    venue: "Cinnamon Lodge, Habarana",
+    templateId: 15,
+    gallery: pickGallery(14),
+    agenda: buildGardenAgenda("Cinnamon Lodge, Habarana"),
   },
 ];
 

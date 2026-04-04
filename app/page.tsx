@@ -16,6 +16,11 @@ const TEMPLATE_PALETTES: Record<number, keyof typeof PALETTES> = {
   8: "lavender",
   9: "blushPink",
   10: "botanical",
+  11: "botanical",
+  12: "lavender",
+  13: "blushPink",
+  14: "burgundy",
+  15: "creamGold",
 };
 
 // One sample invitee per template
@@ -30,6 +35,11 @@ const SAMPLE_NAMES: Record<string, string> = {
   "asela-manasha": "Mr.+%26+Mrs.+Dissanayake",
   "tharaka-sandali": "Saman+Bandara",
   "pasan-hiruni": "The+Rajapaksa+Family",
+  "chamari-dilantha": "Nimesha+%26+Rohan",
+  "ravindu-amaya": "The+Fernando+Family",
+  "kavindi-shehan": "Dr.+Priyantha+%26+Family",
+  "malinda-sithara": "Mr.+%26+Mrs.+Wijeratne",
+  "thilina-devindi": "Kavinga+Senanayake",
 };
 
 export default function Home() {
@@ -52,7 +62,7 @@ export default function Home() {
           <span className="h-px w-12 bg-stone-300" />
         </div>
         <p className="mt-4 text-sm leading-relaxed text-stone-500">
-          10 beautiful designs — each a personalised digital invitation
+          15 beautiful designs — each a personalised digital invitation
           <br className="hidden sm:block" /> your guests open on any device.
         </p>
       </header>
@@ -67,7 +77,7 @@ export default function Home() {
             const inviteQuery = SAMPLE_NAMES[couple.slug] ?? "Guest";
             const href = `/${couple.slug}?invite=${inviteQuery}`;
             const border = theme.colors.border ?? theme.colors.accent;
-            const useLargeCorner = [1, 3, 5, 7].includes(couple.templateId);
+            const useLargeCorner = [1, 3, 5, 7, 14].includes(couple.templateId);
 
             return (
               <Link
