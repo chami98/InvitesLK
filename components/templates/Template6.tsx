@@ -85,21 +85,40 @@ export function Template6({ theme, inviteeName, couple, onOpenRSVP }: TemplatePr
             <p className="text-xs uppercase tracking-[0.22em]" style={{ color: colors.muted }}>
               to the wedding of
             </p>
-            <p
-              className="mt-4 text-[2.6rem] font-light sm:text-[3rem]"
-              style={headingStyle(theme)}
-            >
-              {couple.partnerA}
-            </p>
-            <p className="mt-1 text-xl" style={{ color: colors.muted }}>
-              &amp;
-            </p>
-            <p
-              className="mt-1 text-[2.6rem] font-light sm:text-[3rem]"
-              style={headingStyle(theme)}
-            >
-              {couple.partnerB}
-            </p>
+
+            {/* Couple names */}
+            <div className="mt-5 flex flex-col items-center gap-0">
+              <p
+                className="text-[2.8rem] font-light leading-none tracking-wide sm:text-[3.2rem]"
+                style={headingStyle(theme)}
+              >
+                {couple.partnerA}
+              </p>
+
+              <div className="my-2 flex w-full items-center gap-3">
+                <div
+                  className="h-px flex-1 opacity-40"
+                  style={{ backgroundColor: colors.border }}
+                />
+                <span
+                  className="text-3xl italic leading-none"
+                  style={{ color: colors.accent, fontFamily: "Georgia, serif" }}
+                >
+                  &amp;
+                </span>
+                <div
+                  className="h-px flex-1 opacity-40"
+                  style={{ backgroundColor: colors.border }}
+                />
+              </div>
+
+              <p
+                className="text-[2.8rem] font-light leading-none tracking-wide sm:text-[3.2rem]"
+                style={headingStyle(theme)}
+              >
+                {couple.partnerB}
+              </p>
+            </div>
           </AnimatedBlock>
 
           <AnimatedBlock delay={0.28}>
