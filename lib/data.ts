@@ -944,7 +944,7 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     slug: "chamari-dilantha",
     partnerA: "Chamari",
     partnerB: "Dilantha",
-    date: "Sunday, March 22, 2026",
+    date: "Sunday, May 22, 2026",
     venue: "Brief Garden, Beruwala",
     templateId: 11,
     gallery: pickGallery(10),
