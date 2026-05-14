@@ -2,6 +2,7 @@
 
 import { MOCK_COUPLES } from "@/lib/data";
 import { Check, Copy, ExternalLink } from "lucide-react";
+import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 
 function encodeInviteeName(name: string): string {
@@ -9,7 +10,8 @@ function encodeInviteeName(name: string): string {
 }
 
 export default function GeneratePage() {
-  const [slug, setSlug] = useState(MOCK_COUPLES[0].slug);
+  const searchParams = useSearchParams();
+  const slug = searchParams.get("couple") ?? "";
   const [namesInput, setNamesInput] = useState("");
   const [copied, setCopied] = useState<string | null>(null);
   const [allCopied, setAllCopied] = useState(false);
@@ -18,6 +20,8 @@ export default function GeneratePage() {
     typeof window !== "undefined"
       ? window.location.origin
       : "https://inviteslk.vercel.app";
+
+  const couple = MOCK_COUPLES.find((c) => c.slug === slug);
 
   const names = useMemo(
     () =>
@@ -50,7 +54,37 @@ export default function GeneratePage() {
     setTimeout(() => setAllCopied(false), 2000);
   }
 
-  const couple = MOCK_COUPLES.find((c) => c.slug === slug);
+  if (!slug || !couple) {
+    return (
+      <div className="min-h-dvh bg-stone-100 text-stone-900">
+        <header className="border-b border-stone-200 bg-white px-6 py-10 text-center sm:px-10">
+          <p className="text-xs font-semibold uppercase tracking-[0.38em] text-stone-400">
+            InvitesLK
+          </p>
+          <h1
+            className="mt-2 text-4xl font-normal tracking-wide text-stone-900"
+            style={{ fontFamily: "var(--font-playfair), serif" }}
+          >
+            Generate Invite URLs
+          </h1>
+        </header>
+        <main className="mx-auto max-w-2xl px-4 py-10 sm:px-6">
+          <div className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm text-center">
+            <p className="text-sm text-stone-500">
+              Pass a couple slug via the{" "}
+              <code className="rounded bg-stone-100 px-1.5 py-0.5 text-stone-700">
+                ?couple=
+              </code>{" "}
+              query parameter.
+            </p>
+            <p className="mt-2 font-mono text-xs text-stone-400">
+              /generate?couple=damsarani-supun
+            </p>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-dvh bg-stone-100 text-stone-900">
@@ -62,39 +96,16 @@ export default function GeneratePage() {
           className="mt-2 text-4xl font-normal tracking-wide text-stone-900"
           style={{ fontFamily: "var(--font-playfair), serif" }}
         >
-          Generate Invite URLs
+          {couple.partnerA} &amp; {couple.partnerB}
         </h1>
-        <p className="mt-2 text-sm text-stone-400">
-          Pick a couple, paste guest names — get personalised links.
+        <p className="mt-1 text-xs text-stone-400">
+          {couple.date} · {couple.venue}
         </p>
       </header>
 
       <main className="mx-auto max-w-2xl px-4 py-10 sm:px-6">
-        {/* Couple selector */}
-        <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
-          <label className="block text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
-            Couple
-          </label>
-          <select
-            value={slug}
-            onChange={(e) => setSlug(e.target.value)}
-            className="mt-2 w-full rounded-md border border-stone-200 bg-stone-50 px-3 py-2 text-sm text-stone-800 focus:border-stone-400 focus:outline-none"
-          >
-            {MOCK_COUPLES.map((c) => (
-              <option key={c.slug} value={c.slug}>
-                {c.partnerA} &amp; {c.partnerB} — {c.slug}
-              </option>
-            ))}
-          </select>
-          {couple && (
-            <p className="mt-2 text-xs text-stone-400">
-              {couple.date} · {couple.venue}
-            </p>
-          )}
-        </section>
-
         {/* Names input */}
-        <section className="mt-4 rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
+        <section className="rounded-lg border border-stone-200 bg-white p-6 shadow-sm">
           <label className="block text-xs font-semibold uppercase tracking-[0.2em] text-stone-500">
             Guest Names
             <span className="ml-2 normal-case font-normal tracking-normal text-stone-400">
