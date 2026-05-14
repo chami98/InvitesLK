@@ -3,13 +3,21 @@
 import { MOCK_COUPLES } from "@/lib/data";
 import { Check, Copy, ExternalLink } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 
 function encodeInviteeName(name: string): string {
   return encodeURIComponent(name.trim()).replace(/%20/g, "+");
 }
 
 export default function GeneratePage() {
+  return (
+    <Suspense>
+      <GenerateContent />
+    </Suspense>
+  );
+}
+
+function GenerateContent() {
   const searchParams = useSearchParams();
   const slug = searchParams.get("couple") ?? "";
   const [namesInput, setNamesInput] = useState("");
