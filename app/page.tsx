@@ -83,12 +83,16 @@ export default function Home() {
             const useLargeCorner = [1, 3, 5, 7, 14].includes(couple.templateId);
 
             return (
-              <Link
+              <div
                 key={couple.slug}
-                href={href}
                 className="group relative block overflow-visible focus-visible:outline-none"
-                aria-label={`View ${theme.name} invitation — ${couple.partnerA} & ${couple.partnerB}`}
               >
+                {/* Invisible cover link — whole card navigates to invitation */}
+                <Link
+                  href={href}
+                  className="absolute inset-0 z-[1]"
+                  aria-label={`View ${theme.name} invitation — ${couple.partnerA} & ${couple.partnerB}`}
+                />
                 {/* Outer hover lift */}
                 <div className="relative transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-2xl">
                   {/* Floral corner decoration */}
@@ -200,7 +204,7 @@ export default function Home() {
 
                     {/* "View" footer */}
                     <div
-                      className="relative z-[1] border-t px-5 py-3 text-center"
+                      className="relative z-[2] flex items-center justify-between border-t px-5 py-3"
                       style={{ borderColor: `${border}30` }}
                     >
                       <span
@@ -209,6 +213,17 @@ export default function Home() {
                       >
                         View Invitation →
                       </span>
+                      <Link
+                        href={`/rsvp/${couple.slug}`}
+                        className="relative z-[3] rounded px-2 py-0.5 text-[0.58rem] font-semibold uppercase tracking-[0.18em] transition hover:opacity-70"
+                        style={{
+                          color: theme.colors.muted,
+                          background: `${theme.colors.accent}12`,
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        RSVPs
+                      </Link>
                     </div>
 
                     {/* Hover overlay tint */}
@@ -218,7 +233,7 @@ export default function Home() {
                     />
                   </div>
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>
