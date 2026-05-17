@@ -85,16 +85,14 @@ export default function Home() {
             return (
               <div
                 key={couple.slug}
-                className="group relative block overflow-visible focus-visible:outline-none"
+                className="group relative overflow-visible"
               >
-                {/* Invisible cover link — whole card navigates to invitation */}
+                {/* Main invitation link — the whole card */}
                 <Link
                   href={href}
-                  className="absolute inset-0 z-[1]"
+                  className="relative block transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-2xl focus-visible:outline-none"
                   aria-label={`View ${theme.name} invitation — ${couple.partnerA} & ${couple.partnerB}`}
-                />
-                {/* Outer hover lift */}
-                <div className="relative transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-2xl">
+                >
                   {/* Floral corner decoration */}
                   <div className="pointer-events-none absolute -right-5 -top-5 z-20">
                     {useLargeCorner ? (
@@ -204,7 +202,7 @@ export default function Home() {
 
                     {/* "View" footer */}
                     <div
-                      className="relative z-[2] flex items-center justify-between border-t px-5 py-3"
+                      className="relative z-[1] border-t px-5 py-3 text-center"
                       style={{ borderColor: `${border}30` }}
                     >
                       <span
@@ -213,17 +211,6 @@ export default function Home() {
                       >
                         View Invitation →
                       </span>
-                      <Link
-                        href={`/rsvp/${couple.slug}`}
-                        className="relative z-[3] rounded px-2 py-0.5 text-[0.58rem] font-semibold uppercase tracking-[0.18em] transition hover:opacity-70"
-                        style={{
-                          color: theme.colors.muted,
-                          background: `${theme.colors.accent}12`,
-                        }}
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        RSVPs
-                      </Link>
                     </div>
 
                     {/* Hover overlay tint */}
@@ -232,7 +219,8 @@ export default function Home() {
                       style={{ backgroundColor: theme.colors.accent }}
                     />
                   </div>
-                </div>
+                </Link>
+
               </div>
             );
           })}
