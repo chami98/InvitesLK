@@ -1,3 +1,4 @@
+import { RSVPPinGate } from "@/components/RSVPPinGate";
 import { RSVPRefreshButton } from "@/components/RSVPRefreshButton";
 import { getCoupleBySlug } from "@/lib/data";
 import { supabase, type RSVPRow } from "@/lib/supabase";
@@ -37,6 +38,11 @@ export default async function RSVPDashboardPage({ params }: PageProps) {
     maybe.reduce((s, r) => s + r.party_size, 0);
 
   return (
+    <RSVPPinGate
+      pin={couple.rsvpPin}
+      coupleSlug={coupleSlug}
+      coupleNames={`${couple.partnerA} & ${couple.partnerB}`}
+    >
     <div className="min-h-dvh bg-stone-50 text-stone-900">
       {/* Header */}
       <header className="border-b border-stone-200 bg-white px-4 py-5 sm:px-8">
@@ -103,6 +109,7 @@ export default async function RSVPDashboardPage({ params }: PageProps) {
         </div>
       </main>
     </div>
+    </RSVPPinGate>
   );
 }
 
