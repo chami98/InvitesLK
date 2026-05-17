@@ -990,6 +990,16 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     gallery: pickGallery(14),
     agenda: buildGardenAgenda("Cinnamon Lodge, Habarana"),
   },
+  {                                                                                                         
+    slug: "chamara-nimesha",       // used in the URL: /chamara-nimesha                                     
+    partnerA: "Chamara",                                                                                    
+    partnerB: "Nimesha",                                                                                    
+    date: "Saturday, December 12, 2026",                                                                    
+    venue: "Cinnamon Grand, Colombo",                                                                       
+    templateId: 3,                 // 1–15, picks the visual theme                                          
+    gallery: pickGallery(0),       // offset 0–9, rotates through stock photos                              
+    agenda: buildPoruwaAgenda("Cinnamon Grand, Colombo"),                                                   
+  },   
 ];
 
 const slugMap = new Map(MOCK_COUPLES.map((c) => [c.slug, c]));

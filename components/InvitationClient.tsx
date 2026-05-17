@@ -72,6 +72,8 @@ export function InvitationClient({ couple, theme, inviteeName }: InvitationClien
         accentColor={theme.colors.accent}
         foreground={theme.colors.foreground}
         surface={theme.colors.surface}
+        inviteeName={inviteeName}
+        coupleSlug={couple.slug}
       />
     </>
   );
