@@ -46,6 +46,8 @@ export type CoupleInvite = {
   gallery: GalleryImage[];
   /** Wedding day timeline. */
   agenda: AgendaItem[];
+  /** PIN required to view the RSVP dashboard. */
+  rsvpPin: string;
 };
 
 /** Stock wedding photography for demos — rotate by offset so each couple feels unique. */
@@ -849,6 +851,7 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 1,
     gallery: pickGallery(0),
     agenda: buildPoruwaAgenda("Galadari Hotel, Colombo"),
+    rsvpPin: "1426",
   },
   {
     slug: "kasun-dilrukshi",
@@ -859,6 +862,7 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 2,
     gallery: pickGallery(2),
     agenda: buildModernAgenda("Cinnamon Grand, Colombo"),
+    rsvpPin: "2808",
   },
   {
     slug: "damsarani-supun",
@@ -869,6 +873,7 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 3,
     gallery: pickGallery(4),
     agenda: buildPoruwaAgenda("Hotel Janro, Dompe"),
+    rsvpPin: "3920",
   },
   {
     slug: "nuwan-sachini",
@@ -879,6 +884,7 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 4,
     gallery: pickGallery(1),
     agenda: buildKandyanAgenda("Earl's Regency, Kandy"),
+    rsvpPin: "4010",
   },
   {
     slug: "ishara-chamara",
@@ -889,6 +895,7 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 5,
     gallery: pickGallery(5),
     agenda: buildKandyanAgenda("Heritance Kandalama, Dambulla"),
+    rsvpPin: "5503",
   },
   {
     slug: "dinesh-priyanka",
@@ -899,6 +906,7 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 6,
     gallery: pickGallery(3),
     agenda: buildCoastalAgenda("Jetwing Lighthouse, Galle"),
+    rsvpPin: "6718",
   },
   {
     slug: "roshan-hansika",
@@ -909,6 +917,7 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 7,
     gallery: pickGallery(6),
     agenda: buildPoruwaAgenda("Mount Lavinia Hotel, Colombo"),
+    rsvpPin: "7611",
   },
   {
     slug: "asela-manasha",
@@ -919,6 +928,7 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 8,
     gallery: pickGallery(7),
     agenda: buildGrandPoruwaAgenda("Shangri-La, Colombo"),
+    rsvpPin: "8012",
   },
   {
     slug: "tharaka-sandali",
@@ -929,6 +939,7 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 9,
     gallery: pickGallery(8),
     agenda: buildEveningAgenda("Waters Edge, Battaramulla"),
+    rsvpPin: "9512",
   },
   {
     slug: "pasan-hiruni",
@@ -939,6 +950,7 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 10,
     gallery: pickGallery(9),
     agenda: buildKandyanAgenda("Amaya Hills, Kandy"),
+    rsvpPin: "1028",
   },
   {
     slug: "chamari-dilantha",
@@ -949,6 +961,7 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 11,
     gallery: pickGallery(10),
     agenda: buildGardenAgenda("Brief Garden, Beruwala"),
+    rsvpPin: "2205",
   },
   {
     slug: "ravindu-amaya",
@@ -959,6 +972,7 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 12,
     gallery: pickGallery(11),
     agenda: buildRooftopAgenda("Hilton Colombo Residencies"),
+    rsvpPin: "3716",
   },
   {
     slug: "kavindi-shehan",
@@ -969,6 +983,7 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 13,
     gallery: pickGallery(12),
     agenda: buildVillaAgenda("Anantara Peace Haven, Tangalle"),
+    rsvpPin: "4425",
   },
   {
     slug: "malinda-sithara",
@@ -979,6 +994,7 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 14,
     gallery: pickGallery(13),
     agenda: buildGrandPoruwaAgenda("Galle Face Hotel, Colombo"),
+    rsvpPin: "5211",
   },
   {
     slug: "thilina-devindi",
@@ -989,17 +1005,19 @@ export const MOCK_COUPLES: CoupleInvite[] = [
     templateId: 15,
     gallery: pickGallery(14),
     agenda: buildGardenAgenda("Cinnamon Lodge, Habarana"),
+    rsvpPin: "6018",
   },
-  {                                                                                                         
-    slug: "chamara-nimesha",       // used in the URL: /chamara-nimesha                                     
-    partnerA: "Chamara",                                                                                    
-    partnerB: "Nimesha",                                                                                    
-    date: "Saturday, December 12, 2026",                                                                    
-    venue: "Cinnamon Grand, Colombo",                                                                       
-    templateId: 3,                 // 1–15, picks the visual theme                                          
-    gallery: pickGallery(0),       // offset 0–9, rotates through stock photos                              
-    agenda: buildPoruwaAgenda("Cinnamon Grand, Colombo"),                                                   
-  },   
+  {
+    slug: "chamara-nimesha",
+    partnerA: "Chamara",
+    partnerB: "Nimesha",
+    date: "Saturday, December 12, 2026",
+    venue: "Cinnamon Grand, Colombo",
+    templateId: 3,
+    gallery: pickGallery(0),
+    agenda: buildPoruwaAgenda("Cinnamon Grand, Colombo"),
+    rsvpPin: "7212",
+  },
 ];
 
 const slugMap = new Map(MOCK_COUPLES.map((c) => [c.slug, c]));
