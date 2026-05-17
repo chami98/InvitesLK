@@ -64,6 +64,8 @@ export function InvitationClient({ couple, theme, inviteeName }: InvitationClien
       <InviteChrome
         accentColor={theme.colors.accent}
         surfaceColor={surface}
+        coupleLabel={`${couple.partnerA} & ${couple.partnerB}`}
+        inviteeName={inviteeName}
         onRSVP={() => setRsvpOpen(true)}
       />
       <RSVPModal
