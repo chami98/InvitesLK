@@ -189,17 +189,17 @@ export function SeatingChart({
       )}
 
       {/* Controls */}
-      <div className="rounded-xl border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm p-4 shadow-xl">
+      <div className="rounded-2xl border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm p-6 shadow-xl">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
           <div className="flex-1">
-            <label className="block text-xs font-medium text-slate-300">Table Capacity</label>
+            <label className="block text-sm font-medium text-slate-300">Table Capacity</label>
             <input
               type="number"
               min="1"
               max="20"
               value={newTableCapacity}
               onChange={(e) => setNewTableCapacity(e.target.value)}
-              className="mt-1 rounded-lg border border-slate-600/50 bg-slate-900/50 px-3 py-2 text-sm text-slate-100 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition"
+              className="mt-2 w-full rounded-lg border border-slate-600/50 bg-slate-900/50 px-4 py-2 text-sm text-slate-100 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition"
             />
           </div>
           <button
@@ -220,12 +220,18 @@ export function SeatingChart({
         </div>
       </div>
 
-      {/* Seating layout */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {tables.length === 0 ? (
-          <div className="col-span-full rounded-xl border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm px-6 py-12 text-center text-sm text-slate-400 shadow-xl">
-            No tables yet. Create tables to start seating guests.
-          </div>
+      {/* Section Header */}
+      <div className="mt-8">
+        <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-400">
+          Seating Tables {tables.length > 0 && `(${tables.length})`}
+        </p>
+
+        {/* Seating layout */}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {tables.length === 0 ? (
+            <div className="col-span-full rounded-xl border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm px-6 py-12 text-center text-sm text-slate-400 shadow-xl">
+              No tables yet. Create tables to start seating guests.
+            </div>
         ) : (
           tables.map((table) => {
             const tableGuests = seating.filter((s) => s.seating_table_id === table.id);
@@ -247,33 +253,36 @@ export function SeatingChart({
             );
           })
         )}
+        </div>
       </div>
 
       {/* Unassigned guests */}
-      <div className="rounded-xl border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm p-4 shadow-xl">
-        <h3 className="mb-4 text-sm font-semibold text-white">
+      <div className="mt-8">
+        <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-slate-400">
           Unassigned Guests ({unassignedGuests.length})
-        </h3>
-        {unassignedGuests.length === 0 ? (
-          <p className="text-sm text-slate-400">All guests are assigned!</p>
-        ) : (
-          <div className="space-y-2">
-            {unassignedGuests.map((guest) => (
-              <div
-                key={guest.id}
-                draggable
-                onDragStart={() =>
-                  setDraggedGuest({ rsvpId: guest.id, name: guest.guest_name })
-                }
-                onDragEnd={() => setDraggedGuest(null)}
-                className="cursor-move rounded-lg border border-slate-600/50 bg-slate-900/50 px-3 py-2 text-sm text-slate-100 hover:bg-slate-800 transition"
-              >
-                {guest.guest_name}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+        </p>
+        <div className="rounded-xl border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm p-6 shadow-xl">
+          {unassignedGuests.length === 0 ? (
+            <p className="text-sm text-slate-400">All guests are assigned!</p>
+          ) : (
+            <div className="space-y-2">
+              {unassignedGuests.map((guest) => (
+                <div
+                  key={guest.id}
+                  draggable
+                  onDragStart={() =>
+                    setDraggedGuest({ rsvpId: guest.id, name: guest.guest_name })
+                  }
+                  onDragEnd={() => setDraggedGuest(null)}
+                  className="cursor-move rounded-lg border border-slate-600/50 bg-slate-900/50 px-3 py-2 text-sm text-slate-100 hover:bg-slate-800 transition"
+                >
+                  {guest.guest_name}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        </div>
     </div>
   );
 }
