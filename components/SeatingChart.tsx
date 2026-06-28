@@ -174,7 +174,7 @@ export function SeatingChart({
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12">
-        <div className="text-stone-400">Loading seating data...</div>
+        <div className="text-slate-400">Loading seating data...</div>
       </div>
     );
   }
@@ -183,28 +183,28 @@ export function SeatingChart({
     <div className="space-y-6">
       {/* Error message */}
       {error && (
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
           {error}
         </div>
       )}
 
       {/* Controls */}
-      <div className="rounded-xl border border-stone-200 bg-white p-4">
+      <div className="rounded-xl border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm p-4 shadow-xl">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end">
           <div className="flex-1">
-            <label className="block text-xs font-medium text-stone-500">Table Capacity</label>
+            <label className="block text-xs font-medium text-slate-300">Table Capacity</label>
             <input
               type="number"
               min="1"
               max="20"
               value={newTableCapacity}
               onChange={(e) => setNewTableCapacity(e.target.value)}
-              className="mt-1 rounded-lg border border-stone-200 px-3 py-2 text-sm"
+              className="mt-1 rounded-lg border border-slate-600/50 bg-slate-900/50 px-3 py-2 text-sm text-slate-100 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition"
             />
           </div>
           <button
             onClick={addTable}
-            className="flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+            className="flex items-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 px-4 py-2 text-sm font-medium text-white transition shadow-lg hover:shadow-blue-500/20"
           >
             <Plus size={16} />
             Add Table
@@ -212,7 +212,7 @@ export function SeatingChart({
           <button
             onClick={exportToCSV}
             disabled={tables.length === 0}
-            className="flex items-center gap-2 rounded-lg border border-stone-200 px-4 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50 disabled:opacity-50"
+            className="flex items-center gap-2 rounded-lg border border-slate-600/50 px-4 py-2 text-sm font-medium text-slate-300 hover:bg-slate-700/50 hover:text-white transition disabled:opacity-50"
           >
             <Download size={16} />
             Export CSV
@@ -223,7 +223,7 @@ export function SeatingChart({
       {/* Seating layout */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {tables.length === 0 ? (
-          <div className="col-span-full rounded-xl border border-stone-200 bg-white px-6 py-12 text-center text-sm text-stone-400">
+          <div className="col-span-full rounded-xl border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm px-6 py-12 text-center text-sm text-slate-400 shadow-xl">
             No tables yet. Create tables to start seating guests.
           </div>
         ) : (
@@ -250,12 +250,12 @@ export function SeatingChart({
       </div>
 
       {/* Unassigned guests */}
-      <div className="rounded-xl border border-stone-200 bg-white p-4">
-        <h3 className="mb-3 text-sm font-semibold text-stone-900">
+      <div className="rounded-xl border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm p-4 shadow-xl">
+        <h3 className="mb-4 text-sm font-semibold text-white">
           Unassigned Guests ({unassignedGuests.length})
         </h3>
         {unassignedGuests.length === 0 ? (
-          <p className="text-sm text-stone-400">All guests are assigned!</p>
+          <p className="text-sm text-slate-400">All guests are assigned!</p>
         ) : (
           <div className="space-y-2">
             {unassignedGuests.map((guest) => (
@@ -266,7 +266,7 @@ export function SeatingChart({
                   setDraggedGuest({ rsvpId: guest.id, name: guest.guest_name })
                 }
                 onDragEnd={() => setDraggedGuest(null)}
-                className="cursor-move rounded-lg border border-stone-200 bg-stone-50 px-3 py-2 text-sm text-stone-700 hover:bg-stone-100"
+                className="cursor-move rounded-lg border border-slate-600/50 bg-slate-900/50 px-3 py-2 text-sm text-slate-100 hover:bg-slate-800 transition"
               >
                 {guest.guest_name}
               </div>
@@ -297,18 +297,18 @@ function TableCard({
     <div
       onDragOver={onDragOver}
       onDrop={onDrop}
-      className="rounded-xl border-2 border-dashed border-stone-200 bg-white p-4 hover:border-blue-300 hover:bg-blue-50"
+      className="rounded-xl border-2 border-dashed border-slate-600/50 bg-slate-800/50 hover:border-blue-400/50 hover:bg-slate-800 p-4 transition backdrop-blur-sm shadow-xl"
     >
-      <div className="mb-3 flex items-center justify-between">
+      <div className="mb-4 flex items-center justify-between">
         <div>
-          <h4 className="font-semibold text-stone-900">Table {table.table_number}</h4>
-          <p className="text-xs text-stone-500">
+          <h4 className="font-semibold text-white">Table {table.table_number}</h4>
+          <p className="mt-1 text-xs text-slate-400">
             {guests.length} / {table.capacity} guests
           </p>
         </div>
         <button
           onClick={() => onDeleteTable(table.id)}
-          className="text-red-600 hover:text-red-700"
+          className="text-slate-400 hover:text-red-400 transition"
         >
           <Trash2 size={16} />
         </button>
@@ -316,17 +316,17 @@ function TableCard({
 
       <div className="space-y-2">
         {guests.length === 0 ? (
-          <p className="py-4 text-center text-sm text-stone-400">Drag guests here</p>
+          <p className="py-6 text-center text-sm text-slate-400">Drag guests here</p>
         ) : (
           guests.map((guest) => (
             <div
               key={guest.id}
-              className="flex items-center justify-between rounded-lg bg-stone-50 px-3 py-2 text-sm"
+              className="flex items-center justify-between rounded-lg bg-slate-900/50 px-3 py-2 text-sm"
             >
-              <span className="text-stone-700">{guest.guest_name}</span>
+              <span className="text-slate-100">{guest.guest_name}</span>
               <button
                 onClick={() => onRemoveGuest(guest.rsvp_id)}
-                className="text-stone-400 hover:text-red-600"
+                className="text-slate-400 hover:text-red-400 transition"
               >
                 ×
               </button>
