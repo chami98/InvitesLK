@@ -11,16 +11,18 @@ type Props = {
 
 export function RSVPPinGate({ pin, coupleSlug, coupleNames, children }: Props) {
   const storageKey = `rsvp-pin-${coupleSlug}`;
-  const [unlocked, setUnlocked] = useState(false);
+  const [unlocked, setUnlocked] = useState<boolean | null>(null);
   const [input, setInput] = useState("");
   const [error, setError] = useState(false);
   const [shake, setShake] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (sessionStorage.getItem(storageKey) === pin) {
+    const savedPin = sessionStorage.getItem(storageKey);
+    if (savedPin === pin) {
       setUnlocked(true);
     } else {
+      setUnlocked(false);
       inputRef.current?.focus();
     }
   }, [storageKey, pin]);
@@ -37,6 +39,11 @@ export function RSVPPinGate({ pin, coupleSlug, coupleNames, children }: Props) {
       setTimeout(() => setShake(false), 500);
       inputRef.current?.focus();
     }
+  }
+
+  if (unlocked === null) {
+    // During hydration, render nothing to prevent mismatch
+    return null;
   }
 
   if (unlocked) return <>{children}</>;
