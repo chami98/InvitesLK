@@ -22,6 +22,7 @@ export function SeatingChart({
   const [newTableCapacity, setNewTableCapacity] = useState("8");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [selectedTableId, setSelectedTableId] = useState<string | null>(null);
 
   // Fetch seating data
   useEffect(() => {
@@ -235,11 +236,22 @@ export function SeatingChart({
         ) : (
           tables.map((table) => {
             const tableGuests = seating.filter((s) => s.seating_table_id === table.id);
+            const isSelected = selectedTableId === table.id;
             return (
               <TableCard
                 key={table.id}
                 table={table}
                 guests={tableGuests}
+                isSelected={isSelected}
+                onSelect={() => {
+                  if (draggedGuest) {
+                    assignGuestToTable(draggedGuest.rsvpId, table.id);
+                    setDraggedGuest(null);
+                    setSelectedTableId(null);
+                  } else {
+                    setSelectedTableId(isSelected ? null : table.id);
+                  }
+                }}
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={() => {
                   if (draggedGuest) {
@@ -274,12 +286,31 @@ export function SeatingChart({
                     setDraggedGuest({ rsvpId: guest.id, name: guest.guest_name })
                   }
                   onDragEnd={() => setDraggedGuest(null)}
-                  className="cursor-move rounded-lg border border-slate-600/50 bg-slate-900/50 px-3 py-2 text-sm text-slate-100 hover:bg-slate-800 transition"
+                  onClick={() => {
+                    if (draggedGuest?.rsvpId === guest.id) {
+                      setDraggedGuest(null);
+                    } else {
+                      setDraggedGuest({ rsvpId: guest.id, name: guest.guest_name });
+                    }
+                  }}
+                  className={`rounded-lg border px-3 py-2 text-sm transition cursor-pointer sm:cursor-move ${
+                    draggedGuest?.rsvpId === guest.id
+                      ? "border-blue-400/50 bg-blue-900/50 text-blue-100"
+                      : "border-slate-600/50 bg-slate-900/50 text-slate-100 hover:bg-slate-800"
+                  }`}
                 >
                   {guest.guest_name}
+                  {draggedGuest?.rsvpId === guest.id && (
+                    <span className="ml-2 text-xs text-blue-300">(selected)</span>
+                  )}
                 </div>
               ))}
             </div>
+          )}
+          {draggedGuest && (
+            <p className="mt-4 text-xs text-slate-400">
+              ✓ {draggedGuest.name} selected. Tap a table to assign.
+            </p>
           )}
         </div>
         </div>
@@ -290,6 +321,8 @@ export function SeatingChart({
 function TableCard({
   table,
   guests,
+  isSelected,
+  onSelect,
   onDragOver,
   onDrop,
   onRemoveGuest,
@@ -297,6 +330,8 @@ function TableCard({
 }: {
   table: SeatingTable;
   guests: GuestSeating[];
+  isSelected: boolean;
+  onSelect: () => void;
   onDragOver: (e: React.DragEvent) => void;
   onDrop: (e: React.DragEvent) => void;
   onRemoveGuest: (rsvpId: string) => void;
@@ -304,9 +339,14 @@ function TableCard({
 }) {
   return (
     <div
+      onClick={onSelect}
       onDragOver={onDragOver}
       onDrop={onDrop}
-      className="rounded-xl border-2 border-dashed border-slate-600/50 bg-slate-800/50 hover:border-blue-400/50 hover:bg-slate-800 p-4 transition backdrop-blur-sm shadow-xl"
+      className={`rounded-xl border-2 border-dashed p-4 transition backdrop-blur-sm shadow-xl cursor-pointer ${
+        isSelected
+          ? "border-blue-400/75 bg-blue-900/30 hover:bg-blue-900/40"
+          : "border-slate-600/50 bg-slate-800/50 hover:border-blue-400/50 hover:bg-slate-800"
+      }`}
     >
       <div className="mb-4 flex items-center justify-between">
         <div>
@@ -316,7 +356,10 @@ function TableCard({
           </p>
         </div>
         <button
-          onClick={() => onDeleteTable(table.id)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onDeleteTable(table.id);
+          }}
           className="text-slate-400 hover:text-red-400 transition"
         >
           <Trash2 size={16} />
@@ -325,7 +368,9 @@ function TableCard({
 
       <div className="space-y-2">
         {guests.length === 0 ? (
-          <p className="py-6 text-center text-sm text-slate-400">Drag guests here</p>
+          <p className="py-6 text-center text-sm text-slate-400">
+            {isSelected ? "Select a guest to assign" : "Drag guests here or tap to select"}
+          </p>
         ) : (
           guests.map((guest) => (
             <div
@@ -334,7 +379,10 @@ function TableCard({
             >
               <span className="text-slate-100">{guest.guest_name}</span>
               <button
-                onClick={() => onRemoveGuest(guest.rsvp_id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onRemoveGuest(guest.rsvp_id);
+                }}
                 className="text-slate-400 hover:text-red-400 transition"
               >
                 ×
