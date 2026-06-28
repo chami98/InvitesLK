@@ -5,6 +5,7 @@ import { supabase, type RSVPRow } from "@/lib/supabase";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Users } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
@@ -62,7 +63,16 @@ export default async function RSVPDashboardPage({ params }: PageProps) {
                 {couple.date} &middot; {couple.venue}
               </p>
             </div>
-            <RSVPRefreshButton />
+            <div className="flex gap-2">
+              <Link
+                href={`/rsvp/${coupleSlug}/seating`}
+                className="flex items-center gap-2 rounded-lg border border-stone-200 px-3 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50"
+              >
+                <Users size={16} />
+                Seating
+              </Link>
+              <RSVPRefreshButton />
+            </div>
           </div>
         </div>
       </header>

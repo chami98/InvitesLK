@@ -15,3 +15,20 @@ export type RSVPRow = {
   message: string | null;
   submitted_at: string;
 };
+
+export type SeatingTable = {
+  id: string;
+  couple_slug: string;
+  table_number: number;
+  capacity: number;
+  created_at: string;
+};
+
+export type GuestSeating = {
+  id: string;
+  rsvp_id: string;
+  seating_table_id: string;
+  guest_name: string;
+  couple_slug: string;
+  created_at: string;
+};
