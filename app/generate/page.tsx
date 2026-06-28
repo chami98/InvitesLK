@@ -1,7 +1,8 @@
 "use client";
 
 import { MOCK_COUPLES } from "@/lib/data";
-import { Check, Copy, ExternalLink, MessageCircle, Sparkles, Users } from "lucide-react";
+import { Check, Copy, ExternalLink, Sparkles, Users } from "lucide-react";
+import { WhatsAppIcon } from "@/components/WhatsAppIcon";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useMemo, useState } from "react";
 
@@ -236,10 +237,10 @@ function GenerateContent() {
                       </button>
                       <button
                         onClick={() => shareWhatsApp(name, url)}
-                        className="rounded-lg p-2.5 text-slate-400 hover:text-green-400 hover:bg-green-400/10 transition"
+                        className="rounded-lg p-2.5 text-slate-400 hover:text-green-500 hover:bg-green-500/10 transition"
                         title="Share on WhatsApp"
                       >
-                        <MessageCircle size={16} />
+                        <WhatsAppIcon size={16} />
                       </button>
                     </div>
                   </div>
