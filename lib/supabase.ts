@@ -32,3 +32,15 @@ export type GuestSeating = {
   couple_slug: string;
   created_at: string;
 };
+
+export type CoupleRecord = {
+  id: string;
+  slug: string;
+  partner_a: string;
+  partner_b: string;
+  date: string;
+  venue: string;
+  template_id: number;
+  rsvp_pin: string;
+  created_at: string;
+};

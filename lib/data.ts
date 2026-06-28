@@ -1023,7 +1023,82 @@ export const MOCK_COUPLES: CoupleInvite[] = [
 const slugMap = new Map(MOCK_COUPLES.map((c) => [c.slug, c]));
 
 export function getCoupleBySlug(slug: string): CoupleInvite | undefined {
+  // Check mock data first (for demo couples)
   return slugMap.get(slug);
+}
+
+export async function getCoupleBySlugFromDb(slug: string): Promise<CoupleInvite | undefined> {
+  try {
+    const res = await fetch(`/api/couples?slug=${slug}`, { cache: "no-store" });
+    if (!res.ok) return undefined;
+
+    const data = await res.json();
+    if (data.couple) {
+      const couple = data.couple;
+      // Convert database format to CoupleInvite format
+      return {
+        slug: couple.slug,
+        partnerA: couple.partner_a,
+        partnerB: couple.partner_b,
+        date: couple.date,
+        venue: couple.venue,
+        templateId: couple.template_id,
+        gallery: pickGallery(hashSlug(couple.slug)),
+        agenda: buildDefaultAgenda(couple.venue),
+        rsvpPin: couple.rsvp_pin,
+      };
+    }
+    return undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+function hashSlug(slug: string): number {
+  let hash = 0;
+  for (let i = 0; i < slug.length; i++) {
+    hash = ((hash << 5) - hash) + slug.charCodeAt(i);
+    hash = hash & hash;
+  }
+  return Math.abs(hash) % 16;
+}
+
+function buildDefaultAgenda(venue: string): AgendaItem[] {
+  return [
+    {
+      time: "9:00 AM",
+      title: "Guest arrival & welcome",
+      description: "Arrive and be welcomed with refreshments.",
+      location: venue,
+    },
+    {
+      time: "10:30 AM",
+      title: "Ceremony",
+      description: "The main ceremony begins.",
+    },
+    {
+      time: "12:00 PM",
+      title: "Reception lunch",
+      description: "Join us for a delicious meal.",
+      location: venue,
+    },
+    {
+      time: "6:00 PM",
+      title: "Evening reception",
+      description: "Return for cocktails and celebration.",
+      location: venue,
+    },
+    {
+      time: "7:30 PM",
+      title: "Dinner & entertainment",
+      description: "Dinner service with entertainment.",
+    },
+    {
+      time: "9:30 PM",
+      title: "Dancing & celebration",
+      description: "Dance the night away with loved ones.",
+    },
+  ];
 }
 
 export function getThemeForTemplateId(id: number): WeddingTheme | undefined {
