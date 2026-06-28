@@ -1,7 +1,7 @@
 import { RSVPPinGate } from "@/components/RSVPPinGate";
 import { RSVPRefreshButton } from "@/components/RSVPRefreshButton";
-import { getCoupleBySlug } from "@/lib/data";
-import { supabase, type RSVPRow } from "@/lib/supabase";
+import { getCoupleBySlug, getCoupleBySlugFromDb } from "@/lib/data";
+import { supabase, type RSVPRow, type CoupleRecord } from "@/lib/supabase";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -11,16 +11,30 @@ export const dynamic = "force-dynamic";
 
 type PageProps = { params: Promise<{ coupleSlug: string }> };
 
+async function fetchCouple(coupleSlug: string) {
+  // Check mock data first
+  let couple = getCoupleBySlug(coupleSlug);
+  if (couple) return couple;
+
+  // Try database
+  try {
+    const couple = await getCoupleBySlugFromDb(coupleSlug);
+    return couple;
+  } catch {
+    return undefined;
+  }
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { coupleSlug } = await params;
-  const couple = getCoupleBySlug(coupleSlug);
+  const couple = await fetchCouple(coupleSlug);
   if (!couple) return { title: "RSVP Responses" };
   return { title: `RSVP — ${couple.partnerA} & ${couple.partnerB}` };
 }
 
 export default async function RSVPDashboardPage({ params }: PageProps) {
   const { coupleSlug } = await params;
-  const couple = getCoupleBySlug(coupleSlug);
+  const couple = await fetchCouple(coupleSlug);
   if (!couple) notFound();
 
   const { data: rows, error } = await supabase
