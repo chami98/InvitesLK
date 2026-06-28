@@ -11,51 +11,51 @@ export default async function AdminDashboard() {
   return (
     <div className="space-y-8">
       {/* Welcome */}
-      <div className="rounded-xl border border-stone-200 bg-white p-6 sm:p-8">
-        <h1 className="text-3xl font-bold text-stone-900">Welcome to Admin</h1>
-        <p className="mt-2 text-stone-600">
+      <div className="rounded-2xl border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm p-8 shadow-xl">
+        <h1 className="text-4xl font-normal tracking-wide text-white">Welcome to Admin</h1>
+        <p className="mt-3 text-slate-400">
           Manage your wedding invitations and RSVPs
         </p>
       </div>
 
       {/* Quick Actions */}
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-6 sm:grid-cols-2">
         <Link
           href="/admin/create-wedding"
-          className="rounded-xl border border-blue-200 bg-gradient-to-br from-blue-50 to-blue-100 p-6 hover:shadow-lg transition"
+          className="group rounded-2xl border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm p-8 hover:bg-slate-800 transition shadow-xl"
         >
-          <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-blue-600 text-white mb-3">
-            <Plus size={20} />
+          <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-r from-blue-600 to-blue-500 text-white mb-4 group-hover:shadow-lg group-hover:shadow-blue-500/20 transition">
+            <Plus size={24} />
           </div>
-          <h3 className="text-lg font-semibold text-stone-900">Create Wedding</h3>
-          <p className="mt-1 text-sm text-stone-600">
+          <h3 className="text-lg font-semibold text-white">Create Wedding</h3>
+          <p className="mt-2 text-sm text-slate-400">
             Set up a new wedding invitation
           </p>
         </Link>
 
         <Link
           href="/admin/weddings"
-          className="rounded-xl border border-stone-200 bg-white p-6 hover:shadow-lg transition"
+          className="group rounded-2xl border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm p-8 hover:bg-slate-800 transition shadow-xl"
         >
-          <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-stone-200 text-stone-700 mb-3">
-            <Settings size={20} />
+          <div className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-r from-purple-600 to-purple-500 text-white mb-4 group-hover:shadow-lg group-hover:shadow-purple-500/20 transition">
+            <Settings size={24} />
           </div>
-          <h3 className="text-lg font-semibold text-stone-900">Manage Weddings</h3>
-          <p className="mt-1 text-sm text-stone-600">
+          <h3 className="text-lg font-semibold text-white">Manage Weddings</h3>
+          <p className="mt-2 text-sm text-slate-400">
             View and manage all weddings
           </p>
         </Link>
       </div>
 
       {/* Info */}
-      <div className="rounded-xl border border-stone-200 bg-white p-6">
-        <h3 className="font-semibold text-stone-900">Getting Started</h3>
-        <ul className="mt-3 space-y-2 text-sm text-stone-600">
-          <li>✓ Create a new wedding using the form</li>
-          <li>✓ Share the invitation link with guests</li>
-          <li>✓ Manage RSVPs in the RSVP dashboard</li>
-          <li>✓ Set up seating arrangements</li>
-          <li>✓ Export data for your vendor coordination</li>
+      <div className="rounded-2xl border border-slate-700/50 bg-slate-800/50 backdrop-blur-sm p-8 shadow-xl">
+        <h3 className="font-semibold text-white text-lg">Getting Started</h3>
+        <ul className="mt-4 space-y-3 text-sm text-slate-400">
+          <li className="flex items-center gap-3"><span className="text-blue-400">✓</span> Create a new wedding using the form</li>
+          <li className="flex items-center gap-3"><span className="text-blue-400">✓</span> Share the invitation link with guests</li>
+          <li className="flex items-center gap-3"><span className="text-blue-400">✓</span> Manage RSVPs in the RSVP dashboard</li>
+          <li className="flex items-center gap-3"><span className="text-blue-400">✓</span> Set up seating arrangements</li>
+          <li className="flex items-center gap-3"><span className="text-blue-400">✓</span> Export data for your vendor coordination</li>
         </ul>
       </div>
     </div>

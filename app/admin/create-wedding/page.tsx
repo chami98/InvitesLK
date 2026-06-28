@@ -9,12 +9,12 @@ export const metadata: Metadata = {
 
 export default function AdminCreateWeddingPage() {
   return (
-    <div className="space-y-6">
-      {/* Breadcrumb */}
+    <div className="space-y-8">
+      {/* Header */}
       <div>
         <Link
           href="/admin"
-          className="text-sm text-stone-400 transition hover:text-stone-700"
+          className="text-sm text-slate-400 transition hover:text-slate-300"
         >
           ← Back to Admin
         </Link>
