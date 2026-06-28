@@ -286,14 +286,14 @@ export function SeatingChart({
                     setDraggedGuest({ rsvpId: guest.id, name: guest.guest_name })
                   }
                   onDragEnd={() => setDraggedGuest(null)}
-                  onClick={() => {
+                  onMouseDown={() => {
                     if (draggedGuest?.rsvpId === guest.id) {
                       setDraggedGuest(null);
                     } else {
                       setDraggedGuest({ rsvpId: guest.id, name: guest.guest_name });
                     }
                   }}
-                  className={`rounded-lg border px-3 py-2 text-sm transition cursor-pointer sm:cursor-move ${
+                  className={`select-none rounded-lg border px-3 py-2 text-sm transition cursor-grab active:cursor-grabbing ${
                     draggedGuest?.rsvpId === guest.id
                       ? "border-blue-400/50 bg-blue-900/50 text-blue-100"
                       : "border-slate-600/50 bg-slate-900/50 text-slate-100 hover:bg-slate-800"
@@ -342,7 +342,14 @@ function TableCard({
       onClick={onSelect}
       onDragOver={onDragOver}
       onDrop={onDrop}
-      className={`rounded-xl border-2 border-dashed p-4 transition backdrop-blur-sm shadow-xl cursor-pointer ${
+      onDragEnter={(e) => {
+        e.preventDefault();
+        e.currentTarget.classList.add("border-blue-400/75", "bg-blue-900/20");
+      }}
+      onDragLeave={(e) => {
+        e.currentTarget.classList.remove("border-blue-400/75", "bg-blue-900/20");
+      }}
+      className={`select-none rounded-xl border-2 border-dashed p-4 transition backdrop-blur-sm shadow-xl cursor-pointer ${
         isSelected
           ? "border-blue-400/75 bg-blue-900/30 hover:bg-blue-900/40"
           : "border-slate-600/50 bg-slate-800/50 hover:border-blue-400/50 hover:bg-slate-800"
