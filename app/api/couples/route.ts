@@ -163,3 +163,36 @@ export async function POST(request: Request) {
 
   return NextResponse.json({ couple: data }, { status: 201 });
 }
+
+export async function DELETE(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const coupleId = searchParams.get("coupleId");
+
+  if (!coupleId || typeof coupleId !== "string") {
+    return NextResponse.json({ error: "Missing couple ID" }, { status: 400 });
+  }
+
+  try {
+    // Delete the couple
+    const { error } = await supabase
+      .from("couples")
+      .delete()
+      .eq("id", coupleId);
+
+    if (error) {
+      console.error("Couple delete error:", error.message);
+      return NextResponse.json(
+        { error: "Could not delete couple" },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error("Unexpected error:", err);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 }
+    );
+  }
+}
