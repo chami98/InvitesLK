@@ -4,11 +4,22 @@ import { useState } from "react";
 import { WEDDING_TEMPLATES } from "@/lib/data";
 import Link from "next/link";
 
+function formatDateForDisplay(isoDate: string): string {
+  if (!isoDate) return "";
+  const date = new Date(isoDate + "T00:00:00");
+  return new Intl.DateTimeFormat("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }).format(date);
+}
+
 export function CreateWeddingForm() {
   const [formData, setFormData] = useState({
     partnerA: "",
     partnerB: "",
-    date: "",
+    date: "", // ISO format: YYYY-MM-DD
     venue: "",
     templateId: "1",
     rsvpPin: "",
@@ -32,10 +43,16 @@ export function CreateWeddingForm() {
     setLoading(true);
 
     try {
+      // Format date from ISO (YYYY-MM-DD) to display format (Monday, June 14, 2026)
+      const formattedDate = formatDateForDisplay(formData.date);
+
       const res = await fetch("/api/couples", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          date: formattedDate,
+        }),
       });
 
       if (!res.ok) {
@@ -112,15 +129,18 @@ export function CreateWeddingForm() {
               Wedding Date *
             </label>
             <input
-              type="text"
+              type="date"
               name="date"
               value={formData.date}
               onChange={handleChange}
-              placeholder="e.g., Saturday, June 14, 2026"
               required
               className="mt-2 w-full rounded-lg border border-stone-200 px-4 py-2 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
             />
-            <p className="mt-1 text-xs text-stone-400">Format: Day, Month Date, Year</p>
+            {formData.date && (
+              <p className="mt-2 text-xs text-stone-500">
+                Preview: {formatDateForDisplay(formData.date)}
+              </p>
+            )}
           </div>
           <div>
             <label className="block text-sm font-medium text-stone-700">
