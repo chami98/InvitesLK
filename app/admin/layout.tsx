@@ -1,6 +1,6 @@
 import { AdminAuthGate } from "@/components/AdminAuthGate";
+import { AdminLogoutButton } from "@/components/AdminLogoutButton";
 import Link from "next/link";
-import { LogOut } from "lucide-react";
 
 export default function AdminLayout({
   children,
@@ -23,16 +23,7 @@ export default function AdminLayout({
                 </Link>
                 <p className="mt-0.5 text-xs text-stone-400">Manage weddings</p>
               </div>
-              <button
-                onClick={() => {
-                  sessionStorage.removeItem("admin_auth");
-                  window.location.href = "/";
-                }}
-                className="flex items-center gap-2 rounded-lg border border-stone-200 px-4 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50"
-              >
-                <LogOut size={16} />
-                Logout
-              </button>
+              <AdminLogoutButton />
             </div>
           </div>
         </header>
