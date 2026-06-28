@@ -13,10 +13,23 @@ type PageProps = {
   searchParams: Promise<{ invite?: string | string[] }>;
 };
 
+async function fetchCouple(coupleSlug: string) {
+  // Check mock data first
+  let couple = getCoupleBySlug(coupleSlug);
+  if (couple) return couple;
+
+  // Try database
+  try {
+    const couple = await getCoupleBySlugFromDb(coupleSlug);
+    return couple;
+  } catch {
+    return undefined;
+  }
+}
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { coupleSlug } = await params;
-  let couple = getCoupleBySlug(coupleSlug);
-  if (!couple) couple = await getCoupleBySlugFromDb(coupleSlug);
+  const couple = await fetchCouple(coupleSlug);
 
   if (!couple) return { title: "Invitation — InvitesLK" };
   return {
@@ -29,9 +42,7 @@ export default async function CoupleInvitePage({ params, searchParams }: PagePro
   const { coupleSlug } = await params;
   const sp = await searchParams;
 
-  let couple = getCoupleBySlug(coupleSlug);
-  if (!couple) couple = await getCoupleBySlugFromDb(coupleSlug);
-
+  const couple = await fetchCouple(coupleSlug);
   if (!couple) notFound();
 
   const theme = getThemeForTemplateId(couple.templateId);
