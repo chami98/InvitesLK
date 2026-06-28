@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ExternalLink, Trash2, Eye } from "lucide-react";
+import { ExternalLink, Trash2, Eye, MessageCircle, Copy } from "lucide-react";
 import type { CoupleRecord } from "@/lib/supabase";
 
 export default function AdminWeddingsPage() {
   const [weddings, setWeddings] = useState<CoupleRecord[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchWeddings = async () => {
@@ -53,6 +54,20 @@ export default function AdminWeddingsPage() {
         `Failed to delete wedding: ${err instanceof Error ? err.message : "Unknown error"}`
       );
     }
+  };
+
+  const handleCopyLink = (slug: string) => {
+    const url = `${typeof window !== "undefined" ? window.location.origin : ""}/${slug}`;
+    navigator.clipboard.writeText(url);
+    setCopiedSlug(slug);
+    setTimeout(() => setCopiedSlug(null), 2000);
+  };
+
+  const handleWhatsAppShare = (slug: string, names: string) => {
+    const url = `${typeof window !== "undefined" ? window.location.origin : ""}/${slug}`;
+    const message = `🎉 You're invited to ${names}'s wedding! Check out our invitation: ${url}`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank");
   };
 
   if (loading) {
@@ -121,7 +136,7 @@ export default function AdminWeddingsPage() {
                   </p>
                 </div>
 
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <a
                     href={`/${wedding.slug}`}
                     target="_blank"
@@ -140,6 +155,29 @@ export default function AdminWeddingsPage() {
                   >
                     <ExternalLink size={16} />
                   </a>
+                  <button
+                    onClick={() => handleCopyLink(wedding.slug)}
+                    className={`inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-sm transition ${
+                      copiedSlug === wedding.slug
+                        ? "border-green-200 bg-green-50 text-green-600"
+                        : "border-stone-200 text-stone-700 hover:bg-stone-50"
+                    }`}
+                    title="Copy invitation link"
+                  >
+                    <Copy size={16} />
+                  </button>
+                  <button
+                    onClick={() =>
+                      handleWhatsAppShare(
+                        wedding.slug,
+                        `${wedding.partner_a} & ${wedding.partner_b}`
+                      )
+                    }
+                    className="inline-flex items-center gap-1 rounded-lg border border-green-200 px-3 py-2 text-sm text-green-600 hover:bg-green-50"
+                    title="Share on WhatsApp"
+                  >
+                    <MessageCircle size={16} />
+                  </button>
                   <button
                     onClick={() => handleDelete(wedding.id, wedding.slug)}
                     className="inline-flex items-center gap-1 rounded-lg border border-red-200 px-3 py-2 text-sm text-red-600 hover:bg-red-50"
