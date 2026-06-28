@@ -63,6 +63,7 @@ function GenerateContent() {
   }
 
   function shareWhatsApp(name: string, url: string) {
+    if (!couple) return;
     const message = `Hi ${name}! 🎉\n\nYou're invited to ${couple.partnerA} & ${couple.partnerB}'s wedding!\n\n${url}`;
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
