@@ -31,12 +31,13 @@ export default async function SeatingPage({ params }: PageProps) {
   const rsvpResponses = rows ?? [];
 
   return (
-    <RSVPPinGate
-      pin={couple.rsvpPin}
-      coupleSlug={coupleSlug}
-      coupleNames={`${couple.partnerA} & ${couple.partnerB}`}
-    >
-      <div className="min-h-dvh bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="min-h-dvh bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <RSVPPinGate
+        pin={couple.rsvpPin}
+        coupleSlug={coupleSlug}
+        coupleNames={`${couple.partnerA} & ${couple.partnerB}`}
+      >
+        <div>
         {/* Decorative gradient orbs */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
@@ -66,7 +67,8 @@ export default async function SeatingPage({ params }: PageProps) {
         <main className="relative mx-auto max-w-5xl px-4 py-12 sm:px-8">
           <SeatingChart coupleSlug={coupleSlug} rsvpResponses={rsvpResponses} />
         </main>
-      </div>
-    </RSVPPinGate>
+        </div>
+      </RSVPPinGate>
+    </div>
   );
 }
