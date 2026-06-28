@@ -44,34 +44,40 @@ const SAMPLE_NAMES: Record<string, string> = {
 
 export default function Home() {
   return (
-    <div className="min-h-dvh bg-stone-100 text-stone-900">
+    <div className="min-h-dvh bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      {/* Decorative gradient orbs */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
+      </div>
+
       {/* ── Hero header ── */}
-      <header className="border-b border-stone-200 bg-white px-6 py-12 text-center sm:px-10 sm:py-16">
-        <p className="text-xs font-semibold uppercase tracking-[0.38em] text-stone-400">
+      <header className="relative border-b border-slate-700/50 bg-slate-900/80 backdrop-blur px-6 py-12 text-center sm:px-10 sm:py-16">
+        <p className="text-xs font-semibold uppercase tracking-[0.38em] text-slate-400">
           Digital Wedding Invitations
         </p>
         <h1
-          className="mt-3 text-5xl font-normal leading-none tracking-wide text-stone-900 sm:text-6xl"
+          className="mt-4 text-5xl font-normal leading-none tracking-wide text-white sm:text-6xl"
           style={{ fontFamily: "var(--font-playfair), serif" }}
         >
           InvitesLK
         </h1>
-        <div className="mt-4 flex items-center justify-center gap-3">
-          <span className="h-px w-12 bg-stone-300" />
-          <span className="text-stone-400">✦</span>
-          <span className="h-px w-12 bg-stone-300" />
+        <div className="mt-5 flex items-center justify-center gap-3">
+          <span className="h-px w-12 bg-slate-700" />
+          <span className="text-slate-500">✦</span>
+          <span className="h-px w-12 bg-slate-700" />
         </div>
-        <p className="mt-4 text-sm font-medium uppercase tracking-[0.2em] text-stone-500">
+        <p className="mt-5 text-sm font-medium uppercase tracking-[0.2em] text-slate-400">
           Choose Your Template
         </p>
-        <p className="mt-3 text-sm leading-relaxed text-stone-400">
+        <p className="mt-3 text-sm leading-relaxed text-slate-400">
           15 beautiful designs — each a personalised digital invitation
           <br className="hidden sm:block" /> your guests open on any device.
         </p>
       </header>
 
       {/* ── Template gallery ── */}
-      <main className="mx-auto max-w-7xl px-4 py-12 sm:px-8 sm:py-16">
+      <main className="relative mx-auto max-w-7xl px-4 py-12 sm:px-8 sm:py-16">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {MOCK_COUPLES.map((couple) => {
             const theme = WEDDING_TEMPLATES[couple.templateId];
@@ -227,17 +233,17 @@ export default function Home() {
         </div>
 
         {/* Footer note */}
-        <p className="mt-14 text-center text-xs text-stone-400">
+        <p className="mt-14 text-center text-xs text-slate-400">
           Append{" "}
-          <code className="rounded bg-stone-200/80 px-1.5 py-0.5 text-stone-600">
+          <code className="rounded bg-slate-800/80 px-1.5 py-0.5 text-slate-300">
             ?invite=Guest+Name
           </code>{" "}
           to any URL to personalise the greeting.
         </p>
-        <p className="mt-6 text-center text-xs text-stone-300">
+        <p className="mt-6 text-center text-xs text-slate-400">
           &copy; {new Date().getFullYear()}{" "}
           <span
-            className="font-semibold text-stone-400"
+            className="font-semibold text-slate-400"
             style={{ fontFamily: "var(--font-playfair), serif" }}
           >
             InvitesLK
