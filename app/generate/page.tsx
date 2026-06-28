@@ -1,7 +1,7 @@
 "use client";
 
 import { MOCK_COUPLES } from "@/lib/data";
-import { Check, Copy, ExternalLink } from "lucide-react";
+import { Check, Copy, ExternalLink, MessageCircle } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { Suspense, useMemo, useState } from "react";
 
@@ -60,6 +60,12 @@ function GenerateContent() {
     navigator.clipboard.writeText(text);
     setAllCopied(true);
     setTimeout(() => setAllCopied(false), 2000);
+  }
+
+  function shareWhatsApp(name: string, url: string) {
+    const message = `Hi ${name}! 🎉\n\nYou're invited to ${couple.partnerA} & ${couple.partnerB}'s wedding!\n\n${url}`;
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, "_blank");
   }
 
   if (!slug || !couple) {
@@ -184,6 +190,13 @@ function GenerateContent() {
                       ) : (
                         <Copy size={14} />
                       )}
+                    </button>
+                    <button
+                      onClick={() => shareWhatsApp(name, url)}
+                      className="rounded p-1.5 text-stone-400 transition hover:bg-green-100 hover:text-green-600"
+                      title="Share on WhatsApp"
+                    >
+                      <MessageCircle size={14} />
                     </button>
                   </div>
                 </li>
