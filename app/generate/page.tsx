@@ -191,7 +191,6 @@ function GenerateContent() {
                 ) : (
                   <>
                     <Copy size={16} />
-                    <span>Copy All</span>
                   </>
                 )}
               </button>
@@ -210,7 +209,7 @@ function GenerateContent() {
                         {url}
                       </p>
                     </div>
-                    <div className="flex shrink-0 gap-2 pt-0.5">
+                    <div className="flex shrink-0 gap-2 items-center">
                       <a
                         href={url}
                         target="_blank"
