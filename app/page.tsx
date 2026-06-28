@@ -3,6 +3,7 @@
 import { FloralSmallCorner, FloralCornerCluster, PALETTES } from "@/components/FloralSvg";
 import { MOCK_COUPLES, WEDDING_TEMPLATES } from "@/lib/data";
 import Link from "next/link";
+import { Plus } from "lucide-react";
 
 // Palette for each template's card preview
 const TEMPLATE_PALETTES: Record<number, keyof typeof PALETTES> = {
@@ -47,6 +48,15 @@ export default function Home() {
     <div className="min-h-dvh bg-stone-100 text-stone-900">
       {/* ── Hero header ── */}
       <header className="border-b border-stone-200 bg-white px-6 py-12 text-center sm:px-10 sm:py-16">
+        <div className="mb-6 flex justify-center">
+          <Link
+            href="/create-wedding"
+            className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-6 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700"
+          >
+            <Plus size={16} />
+            Create Your Wedding
+          </Link>
+        </div>
         <p className="text-xs font-semibold uppercase tracking-[0.38em] text-stone-400">
           Digital Wedding Invitations
         </p>
@@ -62,7 +72,7 @@ export default function Home() {
           <span className="h-px w-12 bg-stone-300" />
         </div>
         <p className="mt-4 text-sm font-medium uppercase tracking-[0.2em] text-stone-500">
-          Choose Your Template
+          Choose Your Template or Create Your Own
         </p>
         <p className="mt-3 text-sm leading-relaxed text-stone-400">
           15 beautiful designs — each a personalised digital invitation

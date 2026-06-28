@@ -1,0 +1,229 @@
+"use client";
+
+import { useState } from "react";
+import { WEDDING_TEMPLATES } from "@/lib/data";
+import Link from "next/link";
+
+export function CreateWeddingForm() {
+  const [formData, setFormData] = useState({
+    partnerA: "",
+    partnerB: "",
+    date: "",
+    venue: "",
+    templateId: "1",
+    rsvpPin: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSuccess(null);
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/couples", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Failed to create wedding");
+      }
+
+      const { couple } = await res.json();
+      setSuccess(`✅ Wedding created! Slug: ${couple.slug}`);
+      setFormData({
+        partnerA: "",
+        partnerB: "",
+        date: "",
+        venue: "",
+        templateId: "1",
+        rsvpPin: "",
+      });
+
+      // Redirect after success
+      setTimeout(() => {
+        window.location.href = `/${couple.slug}`;
+      }, 1500);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="mx-auto max-w-2xl rounded-xl border border-stone-200 bg-white p-6 sm:p-8">
+      <h2 className="mb-1 text-2xl font-bold text-stone-900">Create Wedding</h2>
+      <p className="mb-6 text-sm text-stone-500">
+        Set up a new wedding invitation with your details.
+      </p>
+
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Partner Names */}
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label className="block text-sm font-medium text-stone-700">
+              Partner A Name *
+            </label>
+            <input
+              type="text"
+              name="partnerA"
+              value={formData.partnerA}
+              onChange={handleChange}
+              placeholder="e.g., John"
+              required
+              className="mt-2 w-full rounded-lg border border-stone-200 px-4 py-2 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-stone-700">
+              Partner B Name *
+            </label>
+            <input
+              type="text"
+              name="partnerB"
+              value={formData.partnerB}
+              onChange={handleChange}
+              placeholder="e.g., Jane"
+              required
+              className="mt-2 w-full rounded-lg border border-stone-200 px-4 py-2 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
+            />
+          </div>
+        </div>
+
+        {/* Date and Venue */}
+        <div className="grid gap-4 sm:grid-cols-2">
+          <div>
+            <label className="block text-sm font-medium text-stone-700">
+              Wedding Date *
+            </label>
+            <input
+              type="text"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              placeholder="e.g., Saturday, June 14, 2026"
+              required
+              className="mt-2 w-full rounded-lg border border-stone-200 px-4 py-2 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
+            />
+            <p className="mt-1 text-xs text-stone-400">Format: Day, Month Date, Year</p>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-stone-700">
+              Venue *
+            </label>
+            <input
+              type="text"
+              name="venue"
+              value={formData.venue}
+              onChange={handleChange}
+              placeholder="e.g., Galadari Hotel, Colombo"
+              required
+              className="mt-2 w-full rounded-lg border border-stone-200 px-4 py-2 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
+            />
+          </div>
+        </div>
+
+        {/* Template Selection */}
+        <div>
+          <label className="block text-sm font-medium text-stone-700">
+            Invitation Template *
+          </label>
+          <select
+            name="templateId"
+            value={formData.templateId}
+            onChange={handleChange}
+            required
+            className="mt-2 w-full rounded-lg border border-stone-200 px-4 py-2 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
+          >
+            <option value="">Select a template...</option>
+            {Object.entries(WEDDING_TEMPLATES).map(([id, template]) => (
+              <option key={id} value={id}>
+                {template.name} (Template {id})
+              </option>
+            ))}
+          </select>
+          <p className="mt-1 text-xs text-stone-400">
+            Choose the design and color scheme for your invitation
+          </p>
+        </div>
+
+        {/* RSVP PIN */}
+        <div>
+          <label className="block text-sm font-medium text-stone-700">
+            RSVP Dashboard PIN *
+          </label>
+          <input
+            type="text"
+            name="rsvpPin"
+            value={formData.rsvpPin}
+            onChange={handleChange}
+            placeholder="e.g., 1234"
+            required
+            minLength={4}
+            className="mt-2 w-full rounded-lg border border-stone-200 px-4 py-2 text-sm focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none"
+          />
+          <p className="mt-1 text-xs text-stone-400">
+            Minimum 4 characters. Use this to access your RSVP dashboard.
+          </p>
+        </div>
+
+        {/* Error Message */}
+        {error && (
+          <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+            {error}
+          </div>
+        )}
+
+        {/* Success Message */}
+        {success && (
+          <div className="rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+            {success}
+          </div>
+        )}
+
+        {/* Buttons */}
+        <div className="flex gap-3 pt-4">
+          <button
+            type="submit"
+            disabled={loading}
+            className="flex-1 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700 disabled:opacity-50"
+          >
+            {loading ? "Creating..." : "Create Wedding"}
+          </button>
+          <Link
+            href="/"
+            className="rounded-lg border border-stone-200 px-4 py-2 text-sm font-medium text-stone-700 hover:bg-stone-50"
+          >
+            Cancel
+          </Link>
+        </div>
+      </form>
+
+      {/* Info Box */}
+      <div className="mt-8 rounded-lg border border-blue-200 bg-blue-50 p-4">
+        <h3 className="text-sm font-semibold text-blue-900">After Creating</h3>
+        <ul className="mt-2 space-y-1 text-sm text-blue-700">
+          <li>✓ Your invitation will be live at /{formData.partnerA && formData.partnerB ? `${formData.partnerA.toLowerCase()}-${formData.partnerB.toLowerCase()}` : "[slug]"}</li>
+          <li>✓ Share the invitation URL with guests to collect RSVPs</li>
+          <li>✓ Use your PIN to access the RSVP dashboard</li>
+          <li>✓ Set up seating arrangements from the RSVP dashboard</li>
+        </ul>
+      </div>
+    </div>
+  );
+}

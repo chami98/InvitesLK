@@ -2,6 +2,7 @@ import { InvitationClient } from "@/components/InvitationClient";
 import {
   decodeInviteParam,
   getCoupleBySlug,
+  getCoupleBySlugFromDb,
   getThemeForTemplateId,
 } from "@/lib/data";
 import type { Metadata } from "next";
@@ -14,7 +15,9 @@ type PageProps = {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { coupleSlug } = await params;
-  const couple = getCoupleBySlug(coupleSlug);
+  let couple = getCoupleBySlug(coupleSlug);
+  if (!couple) couple = await getCoupleBySlugFromDb(coupleSlug);
+
   if (!couple) return { title: "Invitation — InvitesLK" };
   return {
     title: `${couple.partnerA} & ${couple.partnerB} — Wedding | InvitesLK`,
@@ -26,7 +29,9 @@ export default async function CoupleInvitePage({ params, searchParams }: PagePro
   const { coupleSlug } = await params;
   const sp = await searchParams;
 
-  const couple = getCoupleBySlug(coupleSlug);
+  let couple = getCoupleBySlug(coupleSlug);
+  if (!couple) couple = await getCoupleBySlugFromDb(coupleSlug);
+
   if (!couple) notFound();
 
   const theme = getThemeForTemplateId(couple.templateId);
