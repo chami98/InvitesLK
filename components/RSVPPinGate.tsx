@@ -11,18 +11,19 @@ type Props = {
 
 export function RSVPPinGate({ pin, coupleSlug, coupleNames, children }: Props) {
   const storageKey = `rsvp-pin-${coupleSlug}`;
-  const [unlocked, setUnlocked] = useState<boolean | null>(null);
+  const [unlocked, setUnlocked] = useState(false);
   const [input, setInput] = useState("");
   const [error, setError] = useState(false);
   const [shake, setShake] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    setMounted(true);
     const savedPin = sessionStorage.getItem(storageKey);
     if (savedPin === pin) {
       setUnlocked(true);
     } else {
-      setUnlocked(false);
       inputRef.current?.focus();
     }
   }, [storageKey, pin]);
@@ -41,15 +42,10 @@ export function RSVPPinGate({ pin, coupleSlug, coupleNames, children }: Props) {
     }
   }
 
-  if (unlocked === null) {
-    // During hydration, render nothing to prevent mismatch
-    return null;
-  }
-
   if (unlocked) return <>{children}</>;
 
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-4">
+    <div suppressHydrationWarning className="flex min-h-dvh items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-4">
       {/* Decorative gradient orbs */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
