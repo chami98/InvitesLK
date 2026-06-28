@@ -1,7 +1,7 @@
 import { RSVPPinGate } from "@/components/RSVPPinGate";
 import { RSVPRefreshButton } from "@/components/RSVPRefreshButton";
-import { getCoupleBySlug, getCoupleBySlugFromDb } from "@/lib/data";
-import { supabase, type RSVPRow, type CoupleRecord } from "@/lib/supabase";
+import { getCoupleBySlug } from "@/lib/data";
+import { supabase, type RSVPRow } from "@/lib/supabase";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -18,9 +18,28 @@ async function fetchCouple(coupleSlug: string) {
 
   // Try database
   try {
-    const couple = await getCoupleBySlugFromDb(coupleSlug);
-    return couple;
-  } catch {
+    const { data } = await supabase
+      .from("couples")
+      .select("*")
+      .eq("slug", coupleSlug)
+      .single();
+
+    if (data) {
+      return {
+        slug: data.slug,
+        partnerA: data.partner_a,
+        partnerB: data.partner_b,
+        date: data.date,
+        venue: data.venue,
+        templateId: data.template_id,
+        gallery: [],
+        agenda: [],
+        rsvpPin: data.rsvp_pin,
+      };
+    }
+    return undefined;
+  } catch (err) {
+    console.error(`Error fetching couple ${coupleSlug}:`, err);
     return undefined;
   }
 }

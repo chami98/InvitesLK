@@ -2,9 +2,12 @@ import { InvitationClient } from "@/components/InvitationClient";
 import {
   decodeInviteParam,
   getCoupleBySlug,
-  getCoupleBySlugFromDb,
   getThemeForTemplateId,
+  pickGallery,
+  buildDefaultAgenda,
+  hashSlug,
 } from "@/lib/data";
+import { supabase } from "@/lib/supabase";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
@@ -20,9 +23,28 @@ async function fetchCouple(coupleSlug: string) {
 
   // Try database
   try {
-    const couple = await getCoupleBySlugFromDb(coupleSlug);
-    return couple;
-  } catch {
+    const { data } = await supabase
+      .from("couples")
+      .select("*")
+      .eq("slug", coupleSlug)
+      .single();
+
+    if (data) {
+      return {
+        slug: data.slug,
+        partnerA: data.partner_a,
+        partnerB: data.partner_b,
+        date: data.date,
+        venue: data.venue,
+        templateId: data.template_id,
+        gallery: pickGallery(hashSlug(data.slug)),
+        agenda: buildDefaultAgenda(data.venue),
+        rsvpPin: data.rsvp_pin,
+      };
+    }
+    return undefined;
+  } catch (err) {
+    console.error(`Error fetching couple ${coupleSlug}:`, err);
     return undefined;
   }
 }

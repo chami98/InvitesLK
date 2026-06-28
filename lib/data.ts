@@ -154,7 +154,7 @@ const WEDDING_PHOTOS: GalleryImage[] = [
   },
 ];
 
-function pickGallery(offset: number): GalleryImage[] {
+export function pickGallery(offset: number): GalleryImage[] {
   const n = WEDDING_PHOTOS.length;
   return Array.from({ length: 8 }, (_, i) => {
     const p = WEDDING_PHOTOS[(offset + i) % n];
@@ -1029,8 +1029,12 @@ export function getCoupleBySlug(slug: string): CoupleInvite | undefined {
 
 export async function getCoupleBySlugFromDb(slug: string): Promise<CoupleInvite | undefined> {
   try {
-    const res = await fetch(`/api/couples?slug=${slug}`, { cache: "no-store" });
-    if (!res.ok) return undefined;
+    const url = `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/api/couples?slug=${slug}`;
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) {
+      console.error(`Failed to fetch couple ${slug}: ${res.status}`);
+      return undefined;
+    }
 
     const data = await res.json();
     if (data.couple) {
@@ -1048,13 +1052,15 @@ export async function getCoupleBySlugFromDb(slug: string): Promise<CoupleInvite 
         rsvpPin: couple.rsvp_pin,
       };
     }
+    console.error(`No couple data returned for ${slug}`);
     return undefined;
-  } catch {
+  } catch (err) {
+    console.error(`Error fetching couple ${slug}:`, err);
     return undefined;
   }
 }
 
-function hashSlug(slug: string): number {
+export function hashSlug(slug: string): number {
   let hash = 0;
   for (let i = 0; i < slug.length; i++) {
     hash = ((hash << 5) - hash) + slug.charCodeAt(i);
@@ -1063,7 +1069,7 @@ function hashSlug(slug: string): number {
   return Math.abs(hash) % 16;
 }
 
-function buildDefaultAgenda(venue: string): AgendaItem[] {
+export function buildDefaultAgenda(venue: string): AgendaItem[] {
   return [
     {
       time: "9:00 AM",
