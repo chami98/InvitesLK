@@ -63,7 +63,7 @@ export default async function SeatingPage({ params }: PageProps) {
           </div>
         </header>
 
-        <main className="relative mx-auto max-w-5xl px-4 py-8 sm:px-8">
+        <main className="relative mx-auto max-w-5xl px-4 py-12 sm:px-8">
           <SeatingChart coupleSlug={coupleSlug} rsvpResponses={rsvpResponses} />
         </main>
       </div>
