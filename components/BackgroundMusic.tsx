@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Music, VolumeX } from "lucide-react";
 import { useEffect, useImperativeHandle, useRef, useState, type Ref } from "react";
 
-const TRACK_SRC = "/music/canon-in-d.m4a";
+const TRACK_SRC = "/music/ordinary.mp3";
 const TARGET_VOLUME = 0.5;
 
 export type BackgroundMusicHandle = {
