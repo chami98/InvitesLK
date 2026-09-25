@@ -40,6 +40,7 @@ export type CoupleRecord = {
   partner_b: string;
   date: string;
   venue: string;
+  venue_map_url: string | null;
   template_id: number;
   rsvp_pin: string;
   created_at: string;

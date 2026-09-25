@@ -74,7 +74,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 
-  const { partnerA, partnerB, date, venue, templateId, rsvpPin } = body;
+  const { partnerA, partnerB, date, venue, venueMapUrl, templateId, rsvpPin } = body;
 
   // Validation
   if (!partnerA || typeof partnerA !== "string" || partnerA.trim().length < 1) {
@@ -97,6 +97,17 @@ export async function POST(request: Request) {
 
   if (!venue || typeof venue !== "string" || venue.trim().length < 1) {
     return NextResponse.json({ error: "Venue is required" }, { status: 400 });
+  }
+
+  let mapUrl: string | undefined;
+  if (venueMapUrl !== undefined && venueMapUrl !== null && venueMapUrl !== "") {
+    if (typeof venueMapUrl !== "string" || !/^https:\/\/\S+$/.test(venueMapUrl.trim())) {
+      return NextResponse.json(
+        { error: "Google Maps link must be a valid https URL" },
+        { status: 400 }
+      );
+    }
+    mapUrl = venueMapUrl.trim();
   }
 
   const templateNum = Number(templateId);
@@ -147,6 +158,8 @@ export async function POST(request: Request) {
       partner_b: partnerB.trim(),
       date: date.trim(),
       venue: venue.trim(),
+      // Only sent when provided, so databases without the column keep working.
+      ...(mapUrl ? { venue_map_url: mapUrl } : {}),
       template_id: templateNum,
       rsvp_pin: rsvpPin.trim(),
     })

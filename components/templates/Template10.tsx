@@ -3,6 +3,7 @@
 import { AnimatedBlock } from "@/components/AnimatedBlock";
 import { FloralWreath, FloralDivider, PALETTES } from "@/components/FloralSvg";
 import { headingStyle } from "@/components/ThemeWrapper";
+import { VenueLink } from "@/components/VenueLink";
 import { Calendar, MapPin } from "lucide-react";
 import type { TemplateProps } from "./types";
 
@@ -109,7 +110,7 @@ export function Template10({ theme, inviteeName, couple, onOpenRSVP }: TemplateP
               </div>
               <div className="flex items-start gap-2">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0" style={{ color: colors.accent }} />
-                <p className="text-sm">{couple.venue}</p>
+                <p className="text-sm"><VenueLink couple={couple} /></p>
               </div>
             </div>
           </AnimatedBlock>

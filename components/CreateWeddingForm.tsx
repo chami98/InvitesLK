@@ -21,6 +21,7 @@ export function CreateWeddingForm() {
     partnerB: "",
     date: "", // ISO format: YYYY-MM-DD
     venue: "",
+    venueMapUrl: "",
     templateId: "1",
     rsvpPin: "",
   });
@@ -67,6 +68,7 @@ export function CreateWeddingForm() {
         partnerB: "",
         date: "",
         venue: "",
+        venueMapUrl: "",
         templateId: "1",
         rsvpPin: "",
       });
@@ -156,6 +158,24 @@ export function CreateWeddingForm() {
               className="mt-2 w-full rounded-xl border border-slate-600/50 bg-slate-900/50 px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition"
             />
           </div>
+        </div>
+
+        {/* Google Maps link */}
+        <div>
+          <label className="block text-sm font-medium text-slate-300">
+            Google Maps Link (optional)
+          </label>
+          <input
+            type="url"
+            name="venueMapUrl"
+            value={formData.venueMapUrl}
+            onChange={handleChange}
+            placeholder="e.g., https://maps.app.goo.gl/..."
+            className="mt-2 w-full rounded-xl border border-slate-600/50 bg-slate-900/50 px-4 py-3 text-sm text-slate-100 placeholder-slate-500 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/20 outline-none transition"
+          />
+          <p className="mt-2 text-xs text-slate-400">
+            Paste the venue&apos;s share link from Google Maps for an exact pin. If left blank, guests get a map search for the venue name.
+          </p>
         </div>
 
         {/* Template Selection */}

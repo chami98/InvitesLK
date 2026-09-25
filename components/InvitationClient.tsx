@@ -6,6 +6,7 @@ import { GallerySection } from "@/components/GallerySection";
 import { InviteChrome } from "@/components/InviteChrome";
 import { RSVPModal } from "@/components/RSVPModal";
 import { ThemeWrapper } from "@/components/ThemeWrapper";
+import { VenueMapSection } from "@/components/VenueMapSection";
 import {
   WeddingLoadBackdrop,
   weddingSectionVariants,
@@ -55,6 +56,9 @@ export function InvitationClient({ couple, theme, inviteeName }: InvitationClien
           </motion.div>
           <motion.div variants={weddingSectionVariants} className="w-full">
             <AgendaSection theme={theme} templateId={couple.templateId} couple={couple} />
+          </motion.div>
+          <motion.div variants={weddingSectionVariants} className="w-full">
+            <VenueMapSection theme={theme} templateId={couple.templateId} couple={couple} />
           </motion.div>
           <motion.div variants={weddingSectionVariants} className="w-full">
             <GallerySection theme={theme} templateId={couple.templateId} couple={couple} />

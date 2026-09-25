@@ -41,6 +41,8 @@ export type CoupleInvite = {
   partnerB: string;
   date: string;
   venue: string;
+  /** Optional Google Maps link for an exact pin (falls back to a search for `venue`). */
+  venueMapUrl?: string;
   templateId: number;
   /** Curated placeholder photos (replace with your own). */
   gallery: GalleryImage[];
@@ -1046,6 +1048,7 @@ export async function getCoupleBySlugFromDb(slug: string): Promise<CoupleInvite 
         partnerB: couple.partner_b,
         date: couple.date,
         venue: couple.venue,
+        venueMapUrl: couple.venue_map_url ?? undefined,
         templateId: couple.template_id,
         gallery: pickGallery(hashSlug(couple.slug)),
         agenda: buildDefaultAgenda(couple.venue),
@@ -1058,6 +1061,19 @@ export async function getCoupleBySlugFromDb(slug: string): Promise<CoupleInvite 
     console.error(`Error fetching couple ${slug}:`, err);
     return undefined;
   }
+}
+
+/** Link that opens the venue in Google Maps (app on mobile, web on desktop). */
+export function getVenueMapsLink(couple: Pick<CoupleInvite, "venue" | "venueMapUrl">): string {
+  return (
+    couple.venueMapUrl ||
+    `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(couple.venue)}`
+  );
+}
+
+/** Keyless Google Maps embed URL for an iframe, searched by venue name. */
+export function getVenueEmbedUrl(venue: string): string {
+  return `https://maps.google.com/maps?q=${encodeURIComponent(venue)}&z=15&output=embed`;
 }
 
 export function hashSlug(slug: string): number {

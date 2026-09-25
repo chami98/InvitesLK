@@ -3,6 +3,7 @@
 import { AnimatedBlock } from "@/components/AnimatedBlock";
 import { GeometricFloralFrame, PALETTES } from "@/components/FloralSvg";
 import { headingStyle } from "@/components/ThemeWrapper";
+import { VenueLink } from "@/components/VenueLink";
 import { Calendar, MapPin } from "lucide-react";
 import type { TemplateProps } from "./types";
 
@@ -95,7 +96,7 @@ export function Template4({ theme, inviteeName, couple, onOpenRSVP }: TemplatePr
                 <p className="text-[0.6rem] uppercase tracking-[0.25em]" style={{ color: colors.muted }}>
                   Venue
                 </p>
-                <p className="mt-0.5 text-xs">{couple.venue}</p>
+                <p className="mt-0.5 text-xs"><VenueLink couple={couple} /></p>
               </div>
             </div>
           </div>

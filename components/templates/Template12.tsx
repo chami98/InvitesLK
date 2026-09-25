@@ -2,6 +2,7 @@
 
 import { AnimatedBlock } from "@/components/AnimatedBlock";
 import { headingStyle } from "@/components/ThemeWrapper";
+import { VenueLink } from "@/components/VenueLink";
 import { Calendar, MapPin } from "lucide-react";
 import type { TemplateProps } from "./types";
 
@@ -174,7 +175,7 @@ export function Template12({ theme, inviteeName, couple, onOpenRSVP }: TemplateP
                   >
                     Venue
                   </p>
-                  <p className="mt-0.5 text-xs">{couple.venue}</p>
+                  <p className="mt-0.5 text-xs"><VenueLink couple={couple} /></p>
                 </div>
               </div>
             </div>

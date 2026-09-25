@@ -29,6 +29,14 @@ create policy "Allow anon read" on couples for select to anon using (true);
 create policy "Allow anon insert" on couples for insert to anon with check (true);
 ```
 
+### Add Google Maps link column
+
+Stores an optional exact-pin Google Maps link for the venue. Without it, invitations fall back to a Maps search for the venue name.
+
+```sql
+alter table couples add column if not exists venue_map_url text;
+```
+
 ### Optional: Enable RLS for Security
 
 ```sql
@@ -70,6 +78,7 @@ You should now see the `couples` table in your **Table Editor**.
 | Partner B | String | Required, 1+ chars |
 | Date | String | Required, e.g., "Saturday, June 14, 2026" |
 | Venue | String | Required, e.g., "Galadari Hotel, Colombo" |
+| Google Maps Link | String | Optional https URL, e.g., "https://maps.app.goo.gl/..." |
 | Template ID | Integer | Required, 1-15 |
 | RSVP PIN | String | Required, 4+ chars |
 
