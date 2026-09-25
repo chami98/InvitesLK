@@ -1,6 +1,7 @@
 "use client";
 
 import { AgendaSection } from "@/components/AgendaSection";
+import { EnvelopeIntro } from "@/components/EnvelopeIntro";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { GallerySection } from "@/components/GallerySection";
 import { InviteChrome } from "@/components/InviteChrome";
@@ -14,8 +15,8 @@ import {
 } from "@/components/WeddingPageLoad";
 import { TemplateRouter } from "@/components/templates/TemplateRouter";
 import type { CoupleInvite, WeddingTheme } from "@/lib/data";
-import { motion, useReducedMotion } from "framer-motion";
-import { useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { useCallback, useState } from "react";
 
 type InvitationClientProps = {
   couple: CoupleInvite;
@@ -27,20 +28,24 @@ export function InvitationClient({ couple, theme, inviteeName }: InvitationClien
   const [rsvpOpen, setRsvpOpen] = useState(false);
   const surface = theme.colors.surface ?? theme.colors.background;
   const reducedMotion = useReducedMotion();
+  const [envelopeOpened, setEnvelopeOpened] = useState(false);
+  const handleEnvelopeOpened = useCallback(() => setEnvelopeOpened(true), []);
 
   return (
     <>
       <ThemeWrapper theme={theme}>
-        <WeddingLoadBackdrop
-          accent={theme.colors.accent}
-          reducedMotion={!!reducedMotion}
-        />
+        {envelopeOpened ? (
+          <WeddingLoadBackdrop
+            accent={theme.colors.accent}
+            reducedMotion={!!reducedMotion}
+          />
+        ) : null}
         <motion.main
           id="main"
           className="relative z-[1] pb-28 md:pb-0"
           variants={weddingStaggerContainer}
-          initial={reducedMotion ? "show" : "hidden"}
-          animate="show"
+          initial="hidden"
+          animate={envelopeOpened ? "show" : "hidden"}
         >
           <motion.div variants={weddingSectionVariants} className="w-full">
             <TemplateRouter
@@ -72,6 +77,19 @@ export function InvitationClient({ couple, theme, inviteeName }: InvitationClien
         inviteeName={inviteeName}
         onRSVP={() => setRsvpOpen(true)}
       />
+      <AnimatePresence>
+        {envelopeOpened ? null : (
+          <EnvelopeIntro
+            key="envelope"
+            theme={theme}
+            partnerA={couple.partnerA}
+            partnerB={couple.partnerB}
+            inviteeName={inviteeName}
+            reducedMotion={!!reducedMotion}
+            onOpened={handleEnvelopeOpened}
+          />
+        )}
+      </AnimatePresence>
       <RSVPModal
         open={rsvpOpen}
         onClose={() => setRsvpOpen(false)}
