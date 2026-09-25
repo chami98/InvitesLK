@@ -1,6 +1,7 @@
 "use client";
 
 import { AgendaSection } from "@/components/AgendaSection";
+import { BackgroundMusic, type BackgroundMusicHandle } from "@/components/BackgroundMusic";
 import { EnvelopeIntro } from "@/components/EnvelopeIntro";
 import { CountdownTimer } from "@/components/CountdownTimer";
 import { GallerySection } from "@/components/GallerySection";
@@ -16,7 +17,7 @@ import {
 import { TemplateRouter } from "@/components/templates/TemplateRouter";
 import type { CoupleInvite, WeddingTheme } from "@/lib/data";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 
 type InvitationClientProps = {
   couple: CoupleInvite;
@@ -30,6 +31,7 @@ export function InvitationClient({ couple, theme, inviteeName }: InvitationClien
   const reducedMotion = useReducedMotion();
   const [envelopeOpened, setEnvelopeOpened] = useState(false);
   const handleEnvelopeOpened = useCallback(() => setEnvelopeOpened(true), []);
+  const musicRef = useRef<BackgroundMusicHandle>(null);
 
   return (
     <>
@@ -86,10 +88,16 @@ export function InvitationClient({ couple, theme, inviteeName }: InvitationClien
             partnerB={couple.partnerB}
             inviteeName={inviteeName}
             reducedMotion={!!reducedMotion}
+            onOpenStart={() => musicRef.current?.start()}
             onOpened={handleEnvelopeOpened}
           />
         )}
       </AnimatePresence>
+      <BackgroundMusic
+        ref={musicRef}
+        accentColor={theme.colors.accent}
+        showToggle={envelopeOpened}
+      />
       <RSVPModal
         open={rsvpOpen}
         onClose={() => setRsvpOpen(false)}

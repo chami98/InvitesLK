@@ -12,6 +12,8 @@ type EnvelopeIntroProps = {
   partnerB: string;
   inviteeName: string;
   reducedMotion: boolean;
+  /** Called synchronously on the opening tap (a user gesture), e.g. to start music. */
+  onOpenStart?: () => void;
   /** Called once the envelope has finished opening; parent should unmount this inside AnimatePresence. */
   onOpened: () => void;
 };
@@ -28,6 +30,7 @@ export function EnvelopeIntro({
   partnerB,
   inviteeName,
   reducedMotion,
+  onOpenStart,
   onOpened,
 }: EnvelopeIntroProps) {
   const [phase, setPhase] = useState<Phase>("closed");
@@ -55,7 +58,9 @@ export function EnvelopeIntro({
   }, [phase, reducedMotion, onOpened]);
 
   const open = () => {
-    if (phase === "closed") setPhase("opening");
+    if (phase !== "closed") return;
+    onOpenStart?.();
+    setPhase("opening");
   };
 
   const isOpening = phase === "opening";
